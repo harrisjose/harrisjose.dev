@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  --primary: #222831;
+  --secondary: #414853;
+  --text-primary: #e5e5e5;
+  --text-secondary: #e5e5e5;
+  --text-highlight: #ff3184;
+
+  /* Common styles for both themes */
+  color: var(--text-primary);
+  background-color: var(--primary);
+  transition: background-color 0.7s, color 0.7s;
+}
+
+body[data-theme='light'] {
+  --primary: #faeee7;
+  --secondary: #fffaf6;
+  --text-primary: #424874;
+  --text-secondary: #424874;
+  --text-highlight: #774eed;
+}
+
+.bg-dark {
+  background-color: var(--primary);
+}
+
+.bg-light {
+  background-color: var(--secondary);
+}
+
+.text-dark {
+  color: var(--text-primary);
+}
+
+.text-light {
+  color: var(--text-secondary);
+}
+
+.text-special {
+  color: var(--text-highlight);
+}
+
+footer {
+  @apply text-center py-3;
+}
+
+.card {
+  @apply px-6 pt-8 pb-6;
+
+  background-color: var(--secondary);
+}
+
+.card.horizontal {
+  @apply mt-10;
+
+  min-height: 130px;
+}
+
+.card.vertical {
+  @apply mt-10;
+
+  min-height: 300px;
+}
+
+.card.vertical:not(:last-of-type) {
+  @apply mr-10;
+}

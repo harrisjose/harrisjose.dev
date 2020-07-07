@@ -1,0 +1,12 @@
+.header {
+  @apply text-2xl flex justify-end items-center mx-16 my-5 font-bold;
+}
+
+.header > * {
+  @apply cursor-pointer;
+  @apply ml-5;
+}
+
+.header svg {
+  @apply w-6 h-6;
+}
