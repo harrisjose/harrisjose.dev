@@ -12,7 +12,6 @@ body {
   /* Common styles for both themes */
   color: var(--text-primary);
   background-color: var(--primary);
-  transition: background-color 0.7s, color 0.7s;
 }
 
 body[data-theme='light'] {
@@ -21,6 +20,15 @@ body[data-theme='light'] {
   --text-primary: #424874;
   --text-secondary: #424874;
   --text-highlight: #774eed;
+}
+
+body,
+div {
+  transition: background-color 0.7s, color 0.1s;
+}
+
+svg {
+  @apply w-6 h-6;
 }
 
 .bg-dark {
@@ -62,7 +70,7 @@ footer {
 .card.vertical {
   @apply mt-10;
 
-  min-height: 300px;
+  min-height: 350px;
 }
 
 .card.vertical:not(:last-of-type) {

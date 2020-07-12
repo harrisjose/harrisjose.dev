@@ -34,7 +34,7 @@ const Home = () => (
           I’m a frontend engineer working on web apps at{' '}
           <a
             className="text-special"
-            href="facilio.com"
+            href="https://facilio.com"
             target="_blank"
             rel="noopener noreferrer"
             aria-describedby="Open company website in a new tab"
