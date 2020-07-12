@@ -62,17 +62,17 @@ footer {
 }
 
 .card.horizontal {
-  @apply mt-10;
+  @apply mt-8;
 
   min-height: 130px;
 }
 
 .card.vertical {
-  @apply mt-10;
+  @apply mt-8;
 
-  min-height: 350px;
+  min-height: 300px;
 }
 
 .card.vertical:not(:last-of-type) {
-  @apply mr-10;
+  @apply mr-8;
 }

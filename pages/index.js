@@ -27,10 +27,10 @@ const Home = () => (
       <ThemeSwitcher></ThemeSwitcher>
     </Header>
 
-    <main className="container mx-auto mb-40">
+    <main className="container max-w-screen-md mx-auto mb-40">
       <div className="mt-32">
-        <h1 className="text-6xl font-bold">Hi, I'm Harris</h1>
-        <div className="text-4xl font-bold mt-6 max-w-screen-sm">
+        <h1 className="text-5xl font-bold">Hi, I'm Harris</h1>
+        <div className="text-3xl font-bold mt-6 max-w-screen-sm">
           I’m a frontend engineer working on web apps at{' '}
           <a
             className="text-special"
