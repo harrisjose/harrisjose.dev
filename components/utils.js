@@ -6,3 +6,6 @@ export const isEmpty = (value) => {
     (typeof value === 'string' && value.trim().length === 0)
   )
 }
+export function formatPath(p) {
+  return p.replace(/\/\index.mdx$/, '')
+}

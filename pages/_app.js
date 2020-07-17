@@ -1,5 +1,4 @@
 import '../styles/globals.css'
-import Prism from 'prismjs'
 import '../styles/highlight-dark.scss'
 import '../styles/highlight-light.scss'
 
