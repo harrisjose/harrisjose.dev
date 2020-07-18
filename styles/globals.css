@@ -5,8 +5,8 @@
 body {
   --primary: #222831;
   --secondary: #414853;
-  --text-primary: #e5e5e5;
-  --text-secondary: #e5e5e5;
+  --text-primary: #f8f8f8;
+  --text-secondary: #b0b0b7;
   --text-highlight: #ff3184;
 
   /* Common styles for both themes */
@@ -15,14 +15,15 @@ body {
 }
 
 body[data-theme='light'] {
-  --primary: #faeee7;
-  --secondary: #fffaf6;
+  --primary: #f7f8fc;
+  --secondary: #fff;
   --text-primary: #424874;
-  --text-secondary: #424874;
+  --text-secondary: #565d95;
   --text-highlight: #774eed;
 }
 
 body,
+nav,
 div {
   transition: background-color 0.7s, color 0.1s;
 }
@@ -49,6 +50,28 @@ svg {
 
 .text-special {
   color: var(--text-highlight);
+}
+
+body .header {
+  background-color: rgba(34, 40, 49, 0.8);
+}
+
+body[data-theme='light'] .header {
+  background-color: rgba(247, 248, 252, 0.8);
+}
+
+.header {
+  @apply sticky w-screen top-0 text-xl;
+
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.header a {
+  @apply cursor-pointer;
+}
+
+.header a:not(:first-of-type) {
+  @apply ml-5;
 }
 
 footer {

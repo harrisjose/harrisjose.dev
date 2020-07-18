@@ -1,91 +1,107 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import Header from '../components/header.js'
-import Github from '../icons/github.svg'
-import Twitter from '../icons/twitter.svg'
-import LinkedIn from '../icons/linkedin.svg'
+import Page from '@/components/page'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
-const ThemeSwitcher = dynamic(() => import('../components/theme-switcher'), {
-  ssr: false,
-})
+import { format, parseISO } from 'date-fns'
+import { frontMatter } from './**/*.mdx'
+import { formatPath } from '@/components/utils'
 
-const Home = () => (
-  <div className="flex flex-col">
-    <Head>
-      <title>Harris Jose</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+import Github from '@/icons/github.svg'
+import Twitter from '@/icons/twitter.svg'
+import LinkedIn from '@/icons/linkedin.svg'
 
-    <Header>
-      <Link href="/blog">
-        <a aria-describedby="Go to Articles">Writing</a>
-      </Link>
-      <Link href="/contact">
-        <a aria-describedby="Go to Contact Info">Contact</a>
-      </Link>
-      <ThemeSwitcher></ThemeSwitcher>
-    </Header>
+const Home = () => {
+  const articles = [...frontMatter]
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
+    .slice(0, 2)
 
-    <main className="container max-w-screen-md mx-auto mb-40">
-      <div className="mt-32">
-        <h1 className="text-5xl font-bold">Hi, I'm Harris</h1>
-        <div className="text-3xl font-bold mt-6 max-w-screen-sm">
-          I’m a frontend engineer working on web apps at{' '}
-          <a
-            className="text-special"
-            href="https://facilio.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-describedby="Open company website in a new tab"
-          >
-            @FacilioInc
-          </a>
+  return (
+    <Page>
+      <Head>
+        <title>Harris Jose</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Header />
+
+      <main className="container max-w-screen-md mx-auto mb-16">
+        <div className="mt-24">
+          <h1 className="text-5xl font-semibold">Hi, I'm Harris</h1>
+          <div className="text-xl max-w-screen-sm">
+            I’m a frontend engineer working on web apps at{' '}
+            <a
+              className="text-special"
+              href="https://facilio.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-describedby="Open company website in a new tab"
+            >
+              @FacilioInc
+            </a>
+          </div>
+          <div className="flex mt-8">
+            <a
+              href="https://github.com/harrisjose"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-describedby="Open twitter profile in a new tab"
+            >
+              <Github className="h-6 w-6 mr-6"></Github>
+            </a>
+            <a
+              href="https://twitter.com/harrispjose"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-describedby="Open twitter profile in a new tab"
+            >
+              <Twitter className="h-6 w-6 mr-6"></Twitter>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/harrisjose"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-describedby="Open twitter profile in a new tab"
+            >
+              <LinkedIn className="h-6 w-6 mr-6"></LinkedIn>
+            </a>
+          </div>
         </div>
-        <div className="flex mt-10">
-          <a
-            href="facilio.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-describedby="Open twitter profile in a new tab"
-          >
-            <Github className="h-8 w-8 mr-8"></Github>
-          </a>
-          <a
-            href="facilio.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-describedby="Open twitter profile in a new tab"
-          >
-            <Twitter className="h-8 w-8 mr-8"></Twitter>
-          </a>
-          <a
-            href="facilio.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-describedby="Open twitter profile in a new tab"
-          >
-            <LinkedIn className="h-8 w-8 mr-8"></LinkedIn>
-          </a>
+        <div className="mt-32 flex flex-col">
+          <div className="text-3xl font-semibold mb-6">Recent Articles</div>
+          {articles.map((page) => (
+            <div key={page.__resourcePath}>
+              <Link href={formatPath(page.__resourcePath)}>
+                <div className="mb-10 cursor-pointer">
+                  <a className="text-xl font-medium">{page.title}</a>
+                  <div
+                    className="text-lg mt-1 text-light"
+                    dangerouslySetInnerHTML={{ __html: page.excerpt }}
+                  ></div>
+                  <div className="mt-5 text-sm text-light">
+                    {format(parseISO(page.date), 'MMMM dd, yyyy')}
+                    {` • `}
+                    {page.readingTime}
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="mt-48 flex flex-col">
-        <div className="text-2xl font-bold">Latest Articles</div>
-        <div className="card horizontal w-full"></div>
-        <div className="card horizontal w-full"></div>
-      </div>
-      <div className="mt-12 flex flex-col">
-        <div className="text-2xl font-bold">Projects</div>
-        <div className="flex flex-row">
-          <div className="card vertical flex-1"></div>
-          <div className="card vertical flex-1"></div>
-          <div className="card vertical flex-1"></div>
+        <div className="mt-12 flex flex-col">
+          <div className="text-3xl font-semibold mb-8">Projects</div>
+          <div className="flex flex-row">
+            <div className="card vertical flex-1"></div>
+            <div className="card vertical flex-1"></div>
+            <div className="card vertical flex-1"></div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
 
-    <footer>2020 © Harris Jose</footer>
-  </div>
-)
+      <Footer />
+    </Page>
+  )
+}
 
 export default Home

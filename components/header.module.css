@@ -1,12 +1,13 @@
-.header {
-  @apply mx-auto my-5 flex justify-end items-center text-xl;
+[data-theme='dark'].header {
+  background-color: rgba(34, 40, 49, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
 }
 
-.header > * {
+.header > a,
+.header > div {
   @apply cursor-pointer;
-  @apply ml-5;
 }
 
-.header svg {
-  @apply w-5 h-5 ml-5;
+.header > a:not(:first-of-type) {
+  @apply ml-5;
 }

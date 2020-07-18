@@ -3,12 +3,13 @@ import { isEmpty } from './utils'
 import Moon from '../icons/moon.svg'
 import Sun from '../icons/sun.svg'
 
-const ThemeSwitcher = () => {
+const Icon = ({ isDark, className }) =>
+  isDark ? <Sun className={className}></Sun> : <Moon className={className}></Moon>
+
+const ThemeSwitcher = ({ className }) => {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
   const preference = localStorage.getItem('hpj-theme')
-  const isDarkPreferred = !isEmpty(preference)
-    ? preference === 'dark'
-    : mediaQuery.matches
+  const isDarkPreferred = !isEmpty(preference) ? preference === 'dark' : mediaQuery.matches
 
   const [isDark, setDark] = useState(isDarkPreferred)
 
@@ -24,10 +25,9 @@ const ThemeSwitcher = () => {
     return () => mediaQuery.removeListener(handler)
   }, [isDark])
 
-  const icon = isDark ? <Sun></Sun> : <Moon></Moon>
   return (
-    <div onClick={() => setDark(!isDark)} className="mt-1">
-      {icon}
+    <div onClick={() => setDark(!isDark)} className={`mt-1 ${className}`}>
+      <Icon isDark={isDark} className="w-5 h-5"></Icon>
     </div>
   )
 }

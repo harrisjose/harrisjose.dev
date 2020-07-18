@@ -1,10 +1,18 @@
 ---
 title: Strategies for Gulp.js at scale
-date: 2018-02-14 19:50:03
-tags: [javascript, gulp, taskrunners, build, tooling]
+date: 2018-02-14
+tags:
+  - javascript
+  - gulp
+  - taskrunners
+  - build
+  - tooling
+excerpt: Tips for keeping your gulp config manageable and fast for very large websites. Based on what we do for the docs and help pages at Zoho.
 ---
 
-Gulp is a great tool for running tasks. It saves us loads of time while development and is very handy when it comes to building websites. We automate a lot of stuff using gulp (like transpiling JS using [Babel](https://babeljs.io/) and auto-prefixing CSS using [PostCss](http://postcss.org/)) and as our projects grew, the number of tasks we had to manage also grew.
+Gulp is a great tool for running tasks. It saves us loads of time while development and is very handy when it comes to building websites.
+
+We automate a lot of stuff using gulp (like transpiling JS using [Babel](https://babeljs.io/) and auto-prefixing CSS using [PostCss](http://postcss.org/)) and as our projects grew, the number of tasks we had to manage also grew.
 
 ## The problem with Gulp
 
@@ -28,12 +36,12 @@ An example task could look like,
  * tasks/cleanFiles.js
  * Clean build artifacts and temp files
  */
-module.exports = function(gulp, config) {
-  return function() {
+module.exports = function (gulp, config) {
+  return function () {
     const rimraf = require('rimraf')
     const folders = ['build', 'tmp', 'public']
 
-    folders.map(folder => {
+    folders.map((folder) => {
       let path = path.join(process.cwd(), folder)
       return rimraf(path)
     })
@@ -52,8 +60,8 @@ An easy way to make your tasks easier to maintain is by separating out folder pa
  * tasks/processJs.js
  * transpiles and lints JS files
  */
-module.exports = function(gulp, config) {
-  return function() {
+module.exports = function (gulp, config) {
+  return function () {
     const babel = require('gulp-babel')
     const eslint = require('gulp-eslint')
     const { babelOptions, eslintOptions } = config
@@ -88,7 +96,7 @@ We usually don't define task dependencies (tasks that should run before a task) 
 A lot of tasks in gulp usually look like this,
 
 ```javascript
-gulp.task('transpile', function() {
+gulp.task('transpile', function () {
   return gulp
     .src('assets/js/*.js')
     .pipe(babel(options))

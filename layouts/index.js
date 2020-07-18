@@ -1,33 +1,29 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-
-import Header from '../components/header.js'
+import { format } from 'date-fns'
+import Page from '@/components/page'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 import styles from './index.module.scss'
 
-const ThemeSwitcher = dynamic(() => import('../components/theme-switcher'), {
-  ssr: false,
-})
-
 export default (frontMatter) => ({ children: content }) => (
-  <div className="flex flex-col">
+  <Page className="flex flex-col">
     <Head>
       <title>{frontMatter.title} | Harris Jose</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <Header>
-      <Link href="/">
-        <a aria-describedby="Go to Home Page">Home</a>
-      </Link>
-      <Link href="/contact">
-        <a aria-describedby="Go to Contact Info">Contact</a>
-      </Link>
-      <ThemeSwitcher></ThemeSwitcher>
-    </Header>
-    <main className={styles.article}>
-      <h1>{frontMatter.title}</h1>
+
+    <Header />
+
+    <main className={`container max-w-screen-md mx-auto mb-16 ${styles.article}`}>
+      <h1 className="text-4xl md:text-5xl mt-8 mb-0 font-bold leading-tight">{frontMatter.title}</h1>
+      <div className="text-sm font-light mt-5 mb-12">
+        {format(frontMatter.date, 'MMMM dd, yyyy')}
+        {` • `}
+        {frontMatter.readingTime}
+      </div>
+
       {content}
     </main>
-    <footer>2020 © Harris Jose</footer>
-  </div>
+    <Footer />
+  </Page>
 )
