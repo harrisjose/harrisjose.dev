@@ -89,14 +89,6 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-col">
-          <div className="text-3xl font-semibold mb-8">Projects</div>
-          <div className="flex flex-row">
-            <div className="card vertical flex-1"></div>
-            <div className="card vertical flex-1"></div>
-            <div className="card vertical flex-1"></div>
-          </div>
-        </div>
       </main>
 
       <Footer />

@@ -36,7 +36,7 @@ code,
 p,
 span,
 a {
-  transition: background-color 0.1s, color 0.1s;
+  transition: background-color 0.3s, color 0.05s;
 }
 
 svg {
@@ -87,26 +87,4 @@ body[data-theme='light'] .header {
 
 footer {
   @apply text-center py-3;
-}
-
-.card {
-  @apply px-6 pt-8 pb-6;
-
-  background-color: var(--secondary);
-}
-
-.card.horizontal {
-  @apply mt-8;
-
-  min-height: 130px;
-}
-
-.card.vertical {
-  @apply mt-8;
-
-  min-height: 300px;
-}
-
-.card.vertical:not(:last-of-type) {
-  @apply mr-8;
 }
