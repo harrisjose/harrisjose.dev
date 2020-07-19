@@ -1,0 +1,58 @@
+.article {
+  text-rendering: optimizeLegibility;
+
+  h2,
+  h3 {
+    .heading-link {
+      @apply text-xl;
+      @screen md {
+        @apply text-2xl;
+      }
+      @apply ml-3;
+      @apply align-middle;
+      color: var(--text-highlight);
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    &:hover .heading-link {
+      opacity: 1;
+    }
+  }
+
+  h2 {
+    @apply text-2xl;
+    @screen md {
+      @apply text-3xl;
+    }
+    @apply my-8;
+    @apply font-semibold;
+  }
+
+  p {
+    @apply leading-relaxed;
+    @apply text-lg;
+    @apply mb-6;
+  }
+
+  pre {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    @apply text-base;
+    @apply my-8;
+    @apply rounded-md;
+  }
+
+  .remark-code-title {
+    background: var(--secondary);
+    color: var(--text-secondary);
+    @apply py-2;
+    @apply px-4;
+    @apply rounded-t-md;
+    @apply rounded-b-none;
+    @apply mt-8;
+  }
+
+  .remark-code-title + pre {
+    @apply mt-0;
+    @apply rounded-t-none;
+  }
+}

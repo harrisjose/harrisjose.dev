@@ -9,16 +9,23 @@
   }
 
   h2 {
-    @apply text-3xl;
+    @screen md {
+      @apply text-3xl;
+    }
+
+    @apply text-2xl;
     @apply my-8;
     @apply font-semibold;
   }
 
   p {
     @apply leading-relaxed;
+    @apply text-lg;
   }
 
   pre {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+
     @apply text-base;
     @apply my-8 #{!important};
   }

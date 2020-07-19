@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/article.scss'
 import '../styles/highlight-dark.scss'
 import '../styles/highlight-light.scss'
 

@@ -1,43 +1,36 @@
 body[data-theme='dark'] {
   /**
- * Nord Theme Originally by Arctic Ice Studio
- * https://nordtheme.com
+ * Dracula Theme originally by Zeno Rocha [@zenorocha]
+ * https://draculatheme.com/
  *
- * Ported for PrismJS by Zane Hitchcoxc (@zwhitchcox) and Gabriel Ramos (@gabrieluizramos)
+ * Ported for PrismJS by Albert Vallverdu [@byverdu]
  */
 
   code[class*='language-'],
   pre[class*='language-'] {
     color: #f8f8f2;
     background: none;
-    font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
-      monospace;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
     text-align: left;
     white-space: pre;
     word-spacing: normal;
     word-break: normal;
     word-wrap: normal;
     line-height: 1.5;
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
     tab-size: 4;
-    -webkit-hyphens: none;
-    -moz-hyphens: none;
-    -ms-hyphens: none;
     hyphens: none;
   }
 
   /* Code blocks */
   pre[class*='language-'] {
     padding: 1em;
-    margin: 0.5em 0;
     overflow: auto;
-    border-radius: 0.3em;
+    border: 1px solid var(--secondary);
   }
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background: #2e3440;
+    background: #1e232b;
   }
 
   /* Inline code */
@@ -51,11 +44,11 @@ body[data-theme='dark'] {
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: #636f88;
+    color: #6272a4;
   }
 
   .token.punctuation {
-    color: #81a1c1;
+    color: #f8f8f2;
   }
 
   .namespace {
@@ -67,15 +60,12 @@ body[data-theme='dark'] {
   .token.constant,
   .token.symbol,
   .token.deleted {
-    color: #81a1c1;
+    color: #ff79c6;
   }
 
+  .token.boolean,
   .token.number {
-    color: #b48ead;
-  }
-
-  .token.boolean {
-    color: #81a1c1;
+    color: #bd93f9;
   }
 
   .token.selector,
@@ -84,7 +74,7 @@ body[data-theme='dark'] {
   .token.char,
   .token.builtin,
   .token.inserted {
-    color: #a3be8c;
+    color: #50fa7b;
   }
 
   .token.operator,
@@ -93,23 +83,23 @@ body[data-theme='dark'] {
   .language-css .token.string,
   .style .token.string,
   .token.variable {
-    color: #81a1c1;
+    color: #f8f8f2;
   }
 
   .token.atrule,
   .token.attr-value,
   .token.function,
   .token.class-name {
-    color: #88c0d0;
+    color: #f1fa8c;
   }
 
   .token.keyword {
-    color: #81a1c1;
+    color: #8be9fd;
   }
 
   .token.regex,
   .token.important {
-    color: #ebcb8b;
+    color: #ffb86c;
   }
 
   .token.important,

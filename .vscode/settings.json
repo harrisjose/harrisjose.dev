@@ -1,4 +1,10 @@
 {
   "css.validate": false,
-  "editor.rulers": [120, 150]
+  "editor.rulers": [
+    80,
+    120,
+    150
+  ],
+  "stylelint.enable": false,
+  "scss.lint.unknownAtRules": "ignore"
 }

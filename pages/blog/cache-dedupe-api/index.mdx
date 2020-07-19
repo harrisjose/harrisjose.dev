@@ -31,18 +31,21 @@ class Cache {
 
     promise
       .then((response) => {
-        // Once the promise resolves store the response into the cache
+        // Once the promise resolves store
+        // the response into the cache
         this.queries[hash] = {
           ...this.queries[hash],
           response,
         }
       })
       .cache((_) => {
-        // If the request fails, you probably want to remove it from the cache
+        // If the request fails, you probably
+        // want to remove it from the cache
         delete this.queries[hash]
       })
 
-    // Return the promise so user can get the response once it resolves
+    // Return the promise so user can get the
+    // response once it resolves
     return promise
   }
 }
@@ -50,12 +53,15 @@ class Cache {
 
 **_getQueryHash_** is a function that returns a deterministic hash based on the URL and params. We sort the params, stringify them and then append that to the URL and now we've got a unique key for a URL.
 
-```javascript
-getQueryHash(url, params) {
-  let paramString = Object.keys(value)
-    .sort()
-    .map(key => ({ [key]: value[key] }))
-  return `${url}:${JSON.stringify(params)}`
+```javascript:utils.js
+export function getQueryHash(url, params) {
+  let paramString = JSON.stringify(
+    Object.keys(params)
+      .sort()
+      .map((key) => ({ [key]: value[key] }))
+  )
+
+  return `${url}:${paramString}`
 }
 ```
 

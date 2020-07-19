@@ -1,19 +1,37 @@
-const withMdxEnhanced = require('next-mdx-enhanced')
 const marked = require('marked')
+const withMdxEnhanced = require('next-mdx-enhanced')
 const readingTime = require('reading-time')
-const rehypePrism = require('@mapbox/rehype-prism')
+
+const autLinkHeaders = [
+  require('remark-autolink-headings'),
+  {
+    behavior: 'append',
+    content: {
+      type: 'element',
+      tagName: 'span',
+      properties: { className: ['heading-link'] },
+      children: [{ type: 'text', value: '#' }],
+    },
+  },
+]
+
+const insertFrontMatter = (mdxContent, frontMatter = {}) => ({
+  readingTime: readingTime(mdxContent).text,
+  excerpt: marked(frontMatter.excerpt || ''),
+})
 
 module.exports = withMdxEnhanced({
   layoutPath: 'layouts',
   defaultLayout: true,
   fileExtensions: ['mdx'],
-  remarkPlugins: [],
-  rehypePlugins: [rehypePrism],
+  remarkPlugins: [
+    require('remark-slug'),
+    autLinkHeaders,
+    require('remark-code-titles'),
+  ],
+  rehypePlugins: [require('@mapbox/rehype-prism')],
   extendFrontMatter: {
-    process: (mdxContent, frontMatter = {}) => ({
-      readingTime: readingTime(mdxContent).text,
-      excerpt: marked(frontMatter.excerpt || ''),
-    }),
+    process: insertFrontMatter,
     phase: 'both',
   },
 })({
