@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import styles from './header.module.css'
 const ThemeSwitcher = dynamic(() => import('@/components/theme-switcher'), {
   ssr: false,
 })

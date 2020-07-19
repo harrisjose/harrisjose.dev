@@ -1,9 +1,8 @@
-import Head from 'next/head'
 import Link from 'next/link'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-
+import Meta from '@/components/meta'
 import { format, parseISO } from 'date-fns'
 import { frontMatter } from './**/*.mdx'
 import { formatPath } from '@/components/utils'
@@ -19,10 +18,9 @@ const Home = () => {
 
   return (
     <Page>
-      <Head>
+      <Meta>
         <title>Harris Jose</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Meta>
 
       <Header />
 

@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Meta from '@/components/meta'
 import { format } from 'date-fns'
 import Page from '@/components/page'
 import Header from '@/components/header'
@@ -6,10 +6,9 @@ import Footer from '@/components/footer'
 
 export default (frontMatter) => ({ children: content }) => (
   <Page className="flex flex-col">
-    <Head>
+    <Meta>
       <title>{frontMatter.title} | Harris Jose</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    </Meta>
 
     <Header />
 

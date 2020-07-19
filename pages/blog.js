@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import Link from 'next/link'
+import Meta from '@/components/meta'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
@@ -15,10 +15,9 @@ const Home = () => {
 
   return (
     <Page>
-      <Head>
+      <Meta>
         <title>Blog | Harris Jose</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      </Meta>
 
       <Header />
 

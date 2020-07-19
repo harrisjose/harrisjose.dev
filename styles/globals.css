@@ -6,26 +6,28 @@ html {
   scroll-padding-top: 75px;
 }
 
-body {
+html,
+html[data-theme='light'] {
   --primary: #222831;
   --secondary: #414853;
   --text-primary: #f8f8f8;
   --text-secondary: #b0b0b7;
   --text-highlight: #ff3184;
   --text-link: #00aef9;
-
-  /* Common styles for both themes */
-  color: var(--text-primary);
-  background-color: var(--primary);
 }
 
-body[data-theme='light'] {
+html[data-theme='light'] {
   --primary: #fff;
   --secondary: #e3e8ee;
   --text-primary: #424874;
   --text-secondary: #565d95;
   --text-highlight: #774eed;
   --text-link: #3274d6;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--primary);
 }
 
 body,
@@ -63,11 +65,11 @@ svg {
   color: var(--text-highlight);
 }
 
-body .header {
+.header {
   background-color: rgba(34, 40, 49, 0.8);
 }
 
-body[data-theme='light'] .header {
+html[data-theme='light'] .header {
   background-color: rgba(255, 255, 255, 0.65);
 }
 
