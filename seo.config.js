@@ -1,4 +1,4 @@
-const title = 'Harris Jose | Full stack JavaScript Developer'
+const title = 'Harris Jose | Full Stack JavaScript Developer'
 
 const SEO = {
   title,
