@@ -36,9 +36,13 @@
 
   pre {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    @apply text-base;
     @apply my-8;
     @apply rounded-md;
+  }
+
+  pre,
+  code {
+    @apply text-sm;
   }
 
   .remark-code-title {

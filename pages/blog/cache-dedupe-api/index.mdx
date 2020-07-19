@@ -19,7 +19,7 @@ Caching and de-duping HTTP requests helps [facilitate local reasoning](https://s
 
 A class works well here since our cache contains an object to store requests and methods to add and remove requests from it. The **_createRequest_** method generates a unique key for the request and inserts it into the cache.
 
-```javascript
+```javascript:cache.js
 class Cache {
   queries = {} // Object to store queries in
 
