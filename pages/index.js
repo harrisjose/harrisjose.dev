@@ -19,9 +19,7 @@ const Home = () => {
 
   return (
     <Page>
-      <Meta>
-        <title>Harris Jose | Full Stack JavaScript Developer</title>
-      </Meta>
+      <Meta></Meta>
 
       <Header />
 

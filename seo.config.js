@@ -1,7 +1,9 @@
-const title = 'Harris Jose | Full Stack JavaScript Developer'
-
+const title = 'Harris Jose'
+const description =
+  'Harris Jose is a frontend engineer and JavaScript enthusiast based in Chennai, India'
 const SEO = {
   title,
+  description,
   canonical: 'https://harrisjose.dev',
   openGraph: {
     type: 'website',
