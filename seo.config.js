@@ -1,4 +1,4 @@
-const title = 'Harris Jose | Front-end developer & JavaScript enthusiast'
+const title = 'Harris Jose | Full stack JavaScript Developer'
 
 const SEO = {
   title,
@@ -10,10 +10,10 @@ const SEO = {
     title,
     images: [
       {
-        url: 'https://harrisjose.dev/static/images/opengraph.jpg',
+        url: 'https://harrisjose.dev/images/opengraph.png',
         alt: title,
-        width: 1280,
-        height: 720,
+        width: 1024,
+        height: 1024,
       },
     ],
   },
