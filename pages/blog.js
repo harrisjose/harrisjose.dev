@@ -9,9 +9,9 @@ import { formatPath } from '@/components/utils'
 import { frontMatter } from './**/*.mdx'
 
 const Home = () => {
-  const list = [...frontMatter].sort(
-    (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
-  )
+  const list = [...frontMatter]
+    .filter((page) => !page.draft)
+    .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
 
   return (
     <Page>
