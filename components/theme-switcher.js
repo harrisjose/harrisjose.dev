@@ -18,21 +18,27 @@ const ThemeSwitcher = ({ className }) => {
     : mediaQuery.matches
 
   const [isDark, setDark] = useState(isDarkPreferred)
+  const [hasClicked, setClicked] = useState(false)
+
+  const handler = ({ matches }) => setDark(matches)
 
   useEffect(() => {
     let theme = isDark ? 'dark' : 'light'
 
-    localStorage.setItem('hpj-theme', theme)
     document.documentElement.setAttribute('data-theme', theme)
-
-    const handler = ({ matches }) => setDark(matches)
+    hasClicked && localStorage.setItem('hpj-theme', theme)
 
     mediaQuery.addListener(handler)
     return () => mediaQuery.removeListener(handler)
   }, [isDark])
 
   return (
-    <div onClick={() => setDark(!isDark)} className={`mt-1 ${className}`}>
+    <div
+      onClick={() => {
+        setDark(!isDark), setClicked(true)
+      }}
+      className={`mt-1 ${className}`}
+    >
       <Icon isDark={isDark} className="w-5 h-5"></Icon>
     </div>
   )

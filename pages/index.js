@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <Page>
       <Meta>
-        <title>Harris Jose</title>
+        <title>Harris Jose | Front-end developer & JavaScript enthusiast</title>
       </Meta>
 
       <Header />

@@ -76,7 +76,7 @@ html[data-theme='light'] .header {
 .header {
   @apply sticky w-screen top-0 text-xl;
 
-  backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(80%) blur(20px);
 }
 
 .header a {
