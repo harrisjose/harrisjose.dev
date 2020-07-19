@@ -20,12 +20,21 @@ Caching and de-duping HTTP requests helps [facilitate local reasoning](https://s
 A class works well here since our cache contains an object to store requests and methods to add and remove requests from it. The **_createRequest_** method generates a unique key for the request and inserts it into the cache.
 
 ```javascript:cache.js
+import { getQueryHash } from 'utils.js'
+
 class Cache {
   queries = {} // Object to store queries in
 
   createRequest(queryFn, url, params) {
     // Get a unique hash for this query
     let hash = getQueryHash(url, params)
+
+    // If the response for the request is already in
+    // the cache, then return that
+    if (this.queries[hash]) {
+      return this.queries[hash].response
+    }
+
     // Call the query fn with params
     let promise = queryFn(url, params)
 
@@ -34,18 +43,17 @@ class Cache {
         // Once the promise resolves store
         // the response into the cache
         this.queries[hash] = {
-          ...this.queries[hash],
           response,
         }
       })
-      .cache((_) => {
-        // If the request fails, you probably
-        // want to remove it from the cache
+      .cache(() => {
+        // If the request fails,
+        // remove it from the cache
         delete this.queries[hash]
       })
 
-    // Return the promise so user can get the
-    // response once it resolves
+    // Return the promise so user can
+    // get the response once it resolves
     return promise
   }
 }
@@ -67,86 +75,108 @@ export function getQueryHash(url, params) {
 
 ## De-duplicating requests
 
-A simple optimization we can add is de-duplicating requests by storing the promise from our **_queryFn_**. Now, when the same request is made again, we can just return the existing promise. This promise is removed once it resolves.
+A simple optimization we can add is de-duplicating requests by storing the promise returned by **_queryFn_**. We'll also remove the promise once it resolves.
 
 ```javascript
-class Cache {
-  queries = {}
+// If the same query is called again, we can re-use the
+// same promise if this request has not yet completed
+this.queries[hash] = {
+  response: null,
+  promise,
+}
 
-  createRequest(queryFn, url, params) {
-    let hash = getQueryHash(url, params)
+promise.then((response) => {
+  this.queries[hash] = {
+    response,
+    promise: null, // Remove the promise
+  }
+})
+```
 
-    if (this.queries[hash]) {
-      // If there is an ongoing request for the same
-      // hash, then return it's promise instead of creating
-      // a new request
-      let { promise } = this.queries[hash]
-      if (promise) return promise
-    }
+Now, when the same request is made again, we can just return the existing promise.
 
-    let promise = queryFn(url, params)
+```javascript
+let hash = getQueryHash(url, params)
 
-    // If the same query is called again, we can re-use the
-    // same promise if this request has not yet completed
-    this.queries[hash] = {
-      response: null,
-      promise,
-    }
+if (this.queries[hash]) {
+  let { promise, response } = this.queries[hash]
 
-    promise
-      .then((response) => {
-        // Once the promise resolves, remove it and
-        // store the response
-        this.queries[hash] = {
-          ...this.queries[hash],
-          response,
-          promise: null,
-        }
-      })
-      .cache((_) => {
-        delete this.queries[hash]
-      })
-
+  // If there is an ongoing request for the same
+  // hash, then return stored promise, else return
+  // response
+  if (promise) {
     return promise
+  } else {
+    return response
   }
 }
+
+// rest of the code...
 ```
 
 ## Cache Invalidation
 
-Checking if a request exists in cache or removing one from the cache is pretty straightforward. But in most cases, you'd usually want the cache to expire based on a timeout. Let's introduce a config object to our **_createRequest_** function that lets us specify how long a request should be persisted in the cache via a **cacheTimeout** prop. We'll also add a way to force cache invalidation with the **force** prop.
+Checking if a request exists in cache or removing one from the cache is pretty straightforward. But in most cases, you'd usually want the cache to expire based on a timeout. We'll introduce a **cacheTimeout** option that'll lets us specify how long a request should be persisted in the cache.
 
 ```javascript
+// Create a timeout fn that clears this query
+// from the cache based on config.cacheTimeout
+let timeoutFn = setTimeout(() => {
+  delete this.queries[hash]
+}, cacheTimeout || 5 * 1000) // defaults to 5 sec
+
+// We'll store timeoutFn so that we can clear
+// it if required
+this.queries[hash] = {
+  response: null,
+  promise,
+  timeoutFn,
+}
+```
+
+We'll also add a **force** option to force cache invalidation for a query.
+
+```javascript
+if (config.force) {
+  // clear the timeout and remove the request from the cache
+  // so that a new request is started
+  clearTimeout(this.queries[hash].timeoutFn)
+  delete this.queries[hash]
+}
+```
+
+Essentially **_createRequest_** is just a higher-order function that manages the cache while you get to make requests like you usually do.
+
+```javascript:cache.js
 class Cache {
   queries = {}
 
-  createRequest(queryFn, url, params, config}) {
+  createRequest(queryFn, url, params, config) {
     let hash = getQueryHash(url, params)
     let promise = queryFn(url, params)
-    let timeoutFn
 
     if (config.force) {
-      // clear the timeout and remove the request from the cache
-      // so that a new request is started
       clearTimeout(this.queries[hash].timeoutFn)
       delete this.queries[hash]
+    } else if (this.queries[hash]) {
+      let { promise, response } = this.queries[hash]
+
+      if (promise) {
+        return promise
+      } else {
+        return response
+      }
     }
 
-    // When the specified time interval is over, the query is
-    // removed from cache. We store the timeoutID from the
-    // timeout fn so that we can clear it if required (defaults to 5s)
-    let skipCache = [0, null].includes(config.cacheTimeout)
-    if(!skipCache) {
-      timeoutFn = setTimeout(() => {
-        delete this.queries[hash]
-      }, config.cacheTimeout || 5 * 1000)
-    }
+    let timeoutFn = setTimeout(() => {
+      delete this.queries[hash]
+    }, config.cacheTimeout || 5 * 1000)
 
     this.queries[hash] = {
       response: null,
       promise,
       timeoutFn,
-    }.
+    }
 
     promise.then((response) => {
       this.queries[hash] = {
@@ -163,25 +193,29 @@ class Cache {
 
 ## Using the cache
 
-We'll be using axios for making the requests but this should work with fetch or anything else you want to use. Since we don't really do anything with the response, it'll be the same as what you'd have if you'd used axios directly. Essentially **_createRequest_** is just a higher-order function that manages the cache while you get to make requests like you usually do.
+We'll be using axios for making the requests but this should work with fetch or anything else you want to use. Since we don't really do anything with the response, it'll be the same as what you'd have if you'd used axios directly.
 
-```javascript
-cache
-  .createRequest(axios.get, 'someurl/api/movies', {
-    params: { ID: 123 },
-  })
-  .then((response) => {
-    // do something with resonse
-  })
-  .catch(() => {
-    // handle error
-  })
+```javascript:MyComponent.js
+import axios from 'axios'
+import cacge from 'cache.js'
+
+function loadMovie(ID) {
+  cache
+    .createRequest(axios.get, 'someurl/api/movies', {
+      params: { ID },
+    })
+    .then((response) => {
+      // do something with resonse
+    })
+    .catch(() => {
+      // handle error
+    })
+}
 ```
 
-This becomes more powerful when you combine it with the [bridge](https://en.wikipedia.org/wiki/Bridge_pattern) or adapter patterns where all the magic would be wrapped up inside a data-layer. This decouples the cache implementation (and axios) from your application code.
+You could also combine it with the [bridge](https://en.wikipedia.org/wiki/Bridge_pattern) pattern where all this would be wrapped up inside a data-layer. This decouples the cache implementation (and axios) from your application code.
 
-```javascript
-// API.js
+```javascript:api.js
 import axios from 'axios'
 
 export const API = {
@@ -189,15 +223,18 @@ export const API = {
     return createRequest(axios.get, url, { params })
   },
   post(url, payload) {
-	return axios.post(url, payload)
-  }
+    return axios.post(url, payload)
+  },
 }
+```
 
-// SomeComponent.js
+```javascript:MyComponent.js
 import API from './api'
 ...
 loadData() {
-  API.get(url, params).then((response) => {...})
+  API.get(url, params).then((response) => {
+    // do something with response
+  })
 }
 ```
 

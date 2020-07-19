@@ -12,6 +12,7 @@ body {
   --text-primary: #f8f8f8;
   --text-secondary: #b0b0b7;
   --text-highlight: #ff3184;
+  --text-link: #00aef9;
 
   /* Common styles for both themes */
   color: var(--text-primary);
@@ -24,6 +25,7 @@ body[data-theme='light'] {
   --text-primary: #424874;
   --text-secondary: #565d95;
   --text-highlight: #774eed;
+  --text-link: #3274d6;
 }
 
 body,

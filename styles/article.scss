@@ -1,6 +1,10 @@
 .article {
   text-rendering: optimizeLegibility;
 
+  a {
+    color: var(--text-link);
+  }
+
   h2,
   h3 {
     .heading-link {
