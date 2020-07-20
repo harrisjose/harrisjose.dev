@@ -1,6 +1,6 @@
 const title = 'Harris Jose'
 const description =
-  'Harris Jose is a frontend engineer and JavaScript enthusiast based in Chennai, India'
+  'Harris Jose is a frontend engineer and JavaScript enthusiast based in Chennai, India.'
 const SEO = {
   title,
   description,

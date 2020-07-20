@@ -6,8 +6,7 @@ html {
   scroll-padding-top: 75px;
 }
 
-html,
-html[data-theme='light'] {
+html[data-theme='dark'] {
   --primary: #222831;
   --secondary: #414853;
   --text-primary: #f8f8f8;
@@ -16,6 +15,7 @@ html[data-theme='light'] {
   --text-link: #00aef9;
 }
 
+html,
 html[data-theme='light'] {
   --primary: #fff;
   --secondary: #e3e8ee;
