@@ -1,4 +1,3 @@
-import got from 'got'
 import Cors from 'micro-cors'
 import { isEmpty } from 'utils'
 
@@ -6,28 +5,15 @@ const cors = Cors({
   allowMethods: ['POST', 'HEAD'],
 })
 
-function createReply(chatId, messageId) {
-  const reply = async (message) => {
-    let { body } = await got.post(
-      `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendMessage`,
-      {
-        json: {
-          chat_id: chatId,
-          text: message,
-          reply_to_message_id: messageId || null,
-          disable_web_page_preview: true,
-          disable_notification: true,
-        },
-        responseType: 'json',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
-
-    return body
-  }
-  return reply
+function createReply(res, chatId, messageId) {
+  return (message) =>
+    res.status(200).json({
+      method: 'sendMessage',
+      chat_id: chatId,
+      text: message || `Published to harrisjose.dev/notes`,
+      reply_to_message_id: messageId || null,
+      disable_notification: true,
+    })
 }
 
 const handler = async (req, res) => {
@@ -47,8 +33,7 @@ const handler = async (req, res) => {
       chat: { id: chatId } = {},
     } = message || {}
 
-    let reply = createReply(chatId, messageId)
-    let response = null
+    let reply = createReply(res, chatId, messageId)
 
     if (String(userId) === process.env.USER_ID) {
       let { entities, text } = message
@@ -56,7 +41,7 @@ const handler = async (req, res) => {
       // Get url for the note
       let urlEntity = entities.find((e) => e.type === 'url')
       if (isEmpty(urlEntity)) {
-        response = await reply('No URL found in message')
+        reply('No URL found in message')
       }
 
       // Get excerpt for the note
@@ -68,16 +53,14 @@ const handler = async (req, res) => {
         .trim()
 
       if (isEmpty(excerpt)) {
-        response = await reply('No excerpt found in message')
+        reply('No excerpt found in message')
       } else {
-        response = await reply('Published')
+        reply()
       }
-
-      res.status(200).json(response)
     } else {
-      // If I did not send the message
-      response = await reply('This is a private bot 😅')
-      res.status(200).end()
+      reply(
+        'This is a private bot 😅. Checkout harrisjose.dev to figure out how to make your own.'
+      )
     }
   }
 }
