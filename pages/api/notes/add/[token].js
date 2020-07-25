@@ -1,19 +1,10 @@
 import got from 'got'
-import Cors from 'cors'
+import Cors from 'micro-cors'
 import { isEmpty } from 'utils'
 
-function cors(req, res) {
-  return new Promise((resolve, reject) =>
-    Cors({
-      methods: ['POST', 'OPTIONS'],
-    })(req, res, (result) => {
-      if (result instanceof Error) {
-        return reject(result)
-      }
-      return resolve(result)
-    })
-  )
-}
+const cors = Cors({
+  allowMethods: ['POST', 'HEAD'],
+})
 
 function createReply(chatId, messageId) {
   const reply = async (message) => {
@@ -39,9 +30,7 @@ function createReply(chatId, messageId) {
   return reply
 }
 
-export default async (req, res) => {
-  await cors(req, res)
-
+const handler = async (req, res) => {
   const {
     query: { token },
     body: update,
@@ -92,3 +81,5 @@ export default async (req, res) => {
     }
   }
 }
+
+export default cors(handler)
