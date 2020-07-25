@@ -11,7 +11,7 @@ const Home = () => (
 
     <Header />
 
-    <main className="container max-w-screen-md mx-auto mb-16 leading-relaxed">
+    <main className="container max-w-screen-md mx-auto mb-16 text-lg leading-relaxed">
       <div className="mt-24">
         <h1 className="text-5xl font-semibold">About Me</h1>
       </div>

@@ -35,12 +35,13 @@
   p {
     @apply leading-relaxed;
     @apply text-lg;
-    @apply mb-6;
+    @apply mt-4;
+    @apply mb-8;
   }
 
   pre {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    @apply my-8;
+    @apply my-10;
     @apply rounded-md;
   }
 

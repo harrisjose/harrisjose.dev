@@ -5,7 +5,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 
 import { format, parseISO } from 'date-fns'
-import { formatPath } from '@/components/utils'
+import { formatPath } from 'utils'
 import { frontMatter } from './**/*.mdx'
 
 const Home = () => {

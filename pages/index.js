@@ -5,7 +5,7 @@ import Footer from '@/components/footer'
 import Meta from '@/components/meta'
 import { format, parseISO } from 'date-fns'
 import { frontMatter } from './**/*.mdx'
-import { formatPath } from '@/components/utils'
+import { formatPath } from 'utils'
 
 import Github from '@/icons/github.svg'
 import Twitter from '@/icons/twitter.svg'
@@ -65,8 +65,10 @@ const Home = () => {
             </a>
           </div>
         </div>
-        <div className="mt-32 flex flex-col">
-          <div className="text-3xl font-semibold mb-6">Recent Articles</div>
+        <div className="mt-48 flex flex-col">
+          <div className="text-sm font-bold text-light mb-10 uppercase">
+            Recent Articles
+          </div>
           {articles.map((page) => (
             <div key={page.__resourcePath}>
               <Link href={formatPath(page.__resourcePath)}>

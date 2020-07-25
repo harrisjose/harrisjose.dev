@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { isEmpty } from './utils'
+import { isEmpty } from '../utils'
 import Moon from '../icons/moon.svg'
 import Sun from '../icons/sun.svg'
 

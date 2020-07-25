@@ -5,7 +5,7 @@ const Meta = ({ children }) => (
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-
+    <html lang="en-US"></html>
     {children}
 
     {/* For adding theme to html element before app loads */}
@@ -23,7 +23,8 @@ const Meta = ({ children }) => (
       }}
     ></script>
 
-    {/* <script
+    {/* Google Analytics
+    <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-111519502-2"
     ></script>
