@@ -31,8 +31,9 @@ export default async (req, res) => {
     body: update,
   } = req
 
-  if (String(token) !== process.env.LOCAL_TOKEN || isEmpty(update)) {
-    res.status(500).end()
+  if (token !== process.env.LOCAL_TOKEN || isEmpty(update)) {
+    console.log(token)
+    res.status(500).end('Invalid Auth')
   } else {
     let { message } = update || {}
     let {
