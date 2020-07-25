@@ -1,5 +1,19 @@
-import { isEmpty } from 'utils'
 import got from 'got'
+import Cors from 'cors'
+import { isEmpty } from 'utils'
+
+function cors(req, res) {
+  return new Promise((resolve, reject) =>
+    Cors({
+      methods: ['POST', 'OPTIONS'],
+    })(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+      return resolve(result)
+    })
+  )
+}
 
 function createReply(chatId, messageId) {
   const reply = async (message) => {
@@ -26,6 +40,8 @@ function createReply(chatId, messageId) {
 }
 
 export default async (req, res) => {
+  await cors(req, res)
+
   const {
     query: { token },
     body: update,
