@@ -1,4 +1,4 @@
-export const isEmpty = (value) => {
+export function isEmpty(value) {
   return (
     value === undefined ||
     value === null ||
@@ -8,6 +8,22 @@ export const isEmpty = (value) => {
 }
 export function formatPath(p) {
   return p.replace(/\/\index.mdx$/, '')
+}
+
+export function makeYaml(json) {
+  let yaml = []
+
+  yaml.push('---')
+  Object.keys(json).forEach((key) => {
+    if (json[key] && json[key].constructor == String) {
+      yaml.push(`${key}: ${json[key]}`)
+    } else if (typeof json[key] === 'boolean') {
+      yaml.push(`${key}: ${String(json[key])}`)
+    }
+  })
+  yaml.push('---')
+
+  return yaml.join('\n')
 }
 
 export function createReply(chatId, messageId) {
