@@ -32,7 +32,7 @@ const createPost = async (content) => {
   const frontmatter = makeYaml({
     createdAt,
     link: content.url,
-    excerpt: content.excerpt,
+    excerpt: `${content.excerpt}`,
     syndicated: false,
     layout: 'note',
   })
