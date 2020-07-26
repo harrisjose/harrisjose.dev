@@ -13,6 +13,9 @@ const Header = () => (
       <Link href="/blog">
         <a aria-describedby="Go to Articlles">Blog</a>
       </Link>
+      <Link href="/notes">
+        <a aria-describedby="Go to Notes">Notes</a>
+      </Link>
       <Link href="/about">
         <a aria-describedby="Go to About Page">About</a>
       </Link>

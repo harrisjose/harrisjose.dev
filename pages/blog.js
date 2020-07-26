@@ -6,7 +6,7 @@ import Footer from '@/components/footer'
 
 import { format, parseISO } from 'date-fns'
 import { formatPath } from 'utils'
-import { frontMatter } from './**/*.mdx'
+import { frontMatter } from './blog/**/*.mdx'
 
 const Home = () => {
   const list = [...frontMatter]

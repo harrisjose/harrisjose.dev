@@ -23,7 +23,7 @@ const insertFrontMatter = (mdxContent, frontMatter = {}) => ({
 module.exports = withMdxEnhanced({
   layoutPath: 'layouts',
   defaultLayout: true,
-  fileExtensions: ['mdx'],
+  fileExtensions: ['md', 'mdx'],
   remarkPlugins: [
     require('remark-slug'),
     autLinkHeaders,
