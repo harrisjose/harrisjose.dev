@@ -18,7 +18,6 @@ export default (frontMatter) => ({ children: content }) => (
       className={`container max-w-screen-md mx-auto note-container text-lg mt-10 md:mt-16`}
     >
       {content}
-
       <div className="mt-5">
         <a href={frontMatter.link} className="text-link link break-words">
           {frontMatter.link}

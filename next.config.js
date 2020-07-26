@@ -1,6 +1,7 @@
 const marked = require('marked')
 const withMdxEnhanced = require('next-mdx-enhanced')
 const readingTime = require('reading-time')
+const matter = require('gray-matter')
 
 const autLinkHeaders = [
   require('remark-autolink-headings'),
@@ -15,10 +16,17 @@ const autLinkHeaders = [
   },
 ]
 
-const insertFrontMatter = (mdxContent, frontMatter = {}) => ({
-  readingTime: readingTime(mdxContent).text,
-  excerpt: marked(frontMatter.excerpt || ''),
-})
+const insertFrontMatter = (mdxContent, frontMatter = {}) => {
+  let excerpt =
+    frontMatter.layout == 'note'
+      ? marked(matter(mdxContent).content)
+      : marked(frontMatter.excerpt || '')
+
+  return {
+    readingTime: readingTime(mdxContent).text,
+    excerpt,
+  }
+}
 
 module.exports = withMdxEnhanced({
   layoutPath: 'layouts',

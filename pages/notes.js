@@ -3,7 +3,6 @@ import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import LinkIcon from '@/icons/link.svg'
-import marked from 'marked'
 import { format } from 'date-fns'
 import { frontMatter } from './notes/*.md'
 
@@ -29,7 +28,7 @@ const Home = () => {
                 <div className="mt-10 cursor-pointer note-container">
                   <div
                     className="text-lg"
-                    dangerouslySetInnerHTML={{ __html: marked(note.excerpt) }}
+                    dangerouslySetInnerHTML={{ __html: note.excerpt }}
                   ></div>
                   <div className="mt-5 flex justify-between">
                     <div className="text-lg text-link inline-block truncate flex-shrink">
