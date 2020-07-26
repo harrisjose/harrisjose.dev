@@ -6,6 +6,7 @@ export function isEmpty(value) {
     (typeof value === 'string' && value.trim().length === 0)
   )
 }
+
 export function formatPath(p) {
   return p.replace(/\/\index.mdx$/, '')
 }
@@ -15,7 +16,10 @@ export function makeYaml(json) {
 
   yaml.push('---')
   Object.keys(json).forEach((key) => {
-    if (json[key] && json[key].constructor == String) {
+    if (
+      json[key] &&
+      (json[key].constructor == String || json[key].constructor === Number)
+    ) {
       yaml.push(`${key}: ${json[key]}`)
     } else if (typeof json[key] === 'boolean') {
       yaml.push(`${key}: ${String(json[key])}`)

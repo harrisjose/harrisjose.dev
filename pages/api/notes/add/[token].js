@@ -34,10 +34,11 @@ const createPost = async (content) => {
     link: content.url,
     excerpt: content.excerpt,
     syndicated: false,
+    layout: 'note',
   })
   const text = content.excerpt
 
-  const fileContent = `${frontmatter}\n\n${text}`
+  const fileContent = `${frontmatter}\n\n${text}\n`
   const fileName = format(createdAt, 'yyyy-MM-dd-Hmm') + '.md'
 
   const url = `https://api.github.com/repos/harrisjose/blog2/contents/pages/notes/${fileName}`
