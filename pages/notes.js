@@ -13,7 +13,9 @@ function formatPath(p) {
 }
 
 const Home = () => {
-  const list = [...frontMatter]
+  const list = [...frontMatter].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  )
   return (
     <Page>
       <Meta>
