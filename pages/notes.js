@@ -18,10 +18,10 @@ const Home = () => {
       <Header />
 
       <main className="container max-w-screen-md mx-auto mb-16">
-        <div className="mt-24">
+        <div className="mt-12 md:mt-24">
           <h1 className="text-5xl font-semibold">Notes</h1>
         </div>
-        <div className="mt-2">
+        <div className="mt-3">
           {list.map((note) => (
             <div key={note.__resourcePath}>
               <a href={note.link} target="_blank" rel="noopener noreferrer">

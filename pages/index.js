@@ -65,8 +65,8 @@ const Home = () => {
             </a>
           </div>
         </div>
-        <div className="mt-48 flex flex-col">
-          <div className="text-sm font-bold text-light mb-10 uppercase">
+        <div className="mt-24 flex flex-col">
+          <div className="text-sm font-bold text-light mb-8 uppercase">
             Recent Articles
           </div>
           {articles.map((page) => (
