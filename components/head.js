@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const Meta = ({ children }) => (
+export default ({ children }) => (
   <Head>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -8,7 +8,6 @@ const Meta = ({ children }) => (
     <html lang="en-US"></html>
     {children}
 
-    {/* For adding theme to html element before app loads */}
     <script
       dangerouslySetInnerHTML={{
         __html: `
@@ -40,5 +39,3 @@ const Meta = ({ children }) => (
     ></script> */}
   </Head>
 )
-
-export default Meta

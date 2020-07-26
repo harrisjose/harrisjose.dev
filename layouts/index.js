@@ -1,8 +1,8 @@
 import Head from '@/components/head'
-import { format } from 'date-fns'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import { format } from 'date-fns'
 
 export default (frontMatter) => ({ children: content }) => (
   <Page className="flex flex-col">
