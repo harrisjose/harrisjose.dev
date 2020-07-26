@@ -1,4 +1,4 @@
-import Meta from '@/components/meta'
+import Head from '@/components/head'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
@@ -6,11 +6,11 @@ import { format } from 'date-fns'
 
 export default (frontMatter) => ({ children: content }) => (
   <Page className="flex flex-col">
-    <Meta>
+    <Head>
       <title>
         {format(frontMatter.createdAt, 'MMMM dd, yyyy')} | Harris Jose
       </title>
-    </Meta>
+    </Head>
 
     <Header />
 
@@ -20,7 +20,7 @@ export default (frontMatter) => ({ children: content }) => (
       {content}
 
       <div className="mt-5">
-        <a href={frontMatter.link} className="text-link break-words">
+        <a href={frontMatter.link} className="text-link link break-words">
           {frontMatter.link}
         </a>
         <div className="text-sm font-light text-light mt-1">

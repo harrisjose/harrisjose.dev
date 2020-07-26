@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import Meta from '@/components/meta'
+import Head from '@/components/head'
 import { format, parseISO } from 'date-fns'
 import { frontMatter } from './**/*.mdx'
 import { formatPath } from 'utils'
@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <Page>
-      <Meta></Meta>
+      <Head></Head>
 
       <Header />
 

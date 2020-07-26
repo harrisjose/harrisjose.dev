@@ -1,13 +1,13 @@
-import Meta from '@/components/meta'
+import Head from '@/components/head'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 
 const Home = () => (
   <Page>
-    <Meta>
+    <Head>
       <title>About | Harris Jose</title>
-    </Meta>
+    </Head>
 
     <Header />
 

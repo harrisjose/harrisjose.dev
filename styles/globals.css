@@ -101,3 +101,16 @@ footer {
   border-color: var(--secondary);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
+
+.link {
+  color: var(--text-link);
+  box-shadow: inset 0 -1px 0 0 currentColor;
+  border-bottom: 1px solid currentColor;
+}
+.link:hover,
+.link:focus {
+  color: #fff;
+  box-shadow: inset 0 -1.25em 0 0 var(--text-link);
+  border-bottom-color: var(--text-link);
+  outline: 0;
+}

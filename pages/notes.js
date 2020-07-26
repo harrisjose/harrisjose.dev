@@ -1,16 +1,11 @@
-import Link from 'next/link'
-import Meta from '@/components/meta'
+import Head from '@/components/head'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-
+import LinkIcon from '@/icons/link.svg'
 import marked from 'marked'
 import { format } from 'date-fns'
 import { frontMatter } from './notes/*.md'
-
-function formatPath(p) {
-  return p.replace(/\.md$/, '')
-}
 
 const Home = () => {
   const list = [...frontMatter].sort(
@@ -18,9 +13,9 @@ const Home = () => {
   )
   return (
     <Page>
-      <Meta>
+      <Head>
         <title>Notes | Harris Jose</title>
-      </Meta>
+      </Head>
       <Header />
 
       <main className="container max-w-screen-md mx-auto mb-16">
@@ -30,25 +25,23 @@ const Home = () => {
         <div className="mt-2">
           {list.map((note) => (
             <div key={note.__resourcePath}>
-              <Link href={formatPath(note.__resourcePath)}>
+              <a href={note.link} target="_blank" rel="noopener noreferrer">
                 <div className="mt-10 cursor-pointer note-container">
                   <div
                     className="text-lg"
                     dangerouslySetInnerHTML={{ __html: marked(note.excerpt) }}
                   ></div>
-                  <div className="mt-5">
-                    <a
-                      href={note.link}
-                      className="text-lg text-link break-words"
-                    >
-                      {note.link}
-                    </a>
-                    <div className="text-sm font-light text-light mt-1">
+                  <div className="mt-5 flex justify-between">
+                    <div className="text-lg text-link inline-block truncate flex-shrink">
+                      <LinkIcon className="h-3 w-3 mr-1 inline" />
+                      <span className="link font-medium">{note.link}</span>
+                    </div>
+                    <div className="text-sm font-light text-light mt-1 flex-none pl-8">
                       {format(note.createdAt, 'MMMM dd, yyyy')}
                     </div>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
           ))}
         </div>
@@ -60,3 +53,7 @@ const Home = () => {
 }
 
 export default Home
+
+// function formatPath(p) {
+//   return p.replace(/\.md$/, '')
+// }
