@@ -2,14 +2,23 @@ import Head from '@/components/head'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import Twitter from '@/icons/twitter.svg'
 import LinkIcon from '@/icons/link.svg'
 import { format } from 'date-fns'
 import { frontMatter } from './notes/*.md'
+import styles from './notes.module.scss'
+
+const getIcon = (url = '') => {
+  let isTwitter = url.includes('twitter.com')
+  let Icon = isTwitter ? Twitter : LinkIcon
+  return <Icon className="h-4 w-4 mr-1 inline" />
+}
 
 const Home = () => {
   const list = [...frontMatter].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   )
+
   return (
     <Page>
       <Head>
@@ -21,27 +30,29 @@ const Home = () => {
         <div className="mt-12 md:mt-24">
           <h1 className="text-5xl font-semibold">Notes</h1>
         </div>
-        <div className="mt-3">
+        <div className={styles.notes}>
           {list.map((note) => (
-            <div key={note.__resourcePath}>
-              <a href={note.link} target="_blank" rel="noopener noreferrer">
-                <div className="mt-10 cursor-pointer note-container">
-                  <div
-                    className="text-lg"
-                    dangerouslySetInnerHTML={{ __html: note.excerpt }}
-                  ></div>
-                  <div className="mt-5 flex justify-between">
-                    <div className="text-lg text-link inline-block truncate flex-shrink">
-                      <LinkIcon className="h-3 w-3 mr-1 inline" />
-                      <span className="link font-medium">{note.link}</span>
-                    </div>
-                    <div className="text-sm font-light text-light mt-1 flex-none pl-8">
-                      {format(note.createdAt, 'MMMM dd, yyyy')}
-                    </div>
-                  </div>
+            <a
+              href={note.link}
+              key={note.__resourcePath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-10 cursor-pointer block bg-dark relative ${styles.note}`}
+            >
+              <div className="text-sm font-light text-light mb-8 flex">
+                {format(note.createdAt, 'MMMM dd, yyyy')}
+                <span className="ml-auto">{getIcon(note.link)}</span>
+              </div>
+              <div
+                className="text-"
+                dangerouslySetInnerHTML={{ __html: note.excerpt }}
+              ></div>
+              <div className="mt-5 flex justify-between">
+                <div className="text-link inline-block truncate flex-shrink">
+                  <span className="link ">{note.link}</span>
                 </div>
-              </a>
-            </div>
+              </div>
+            </a>
           ))}
         </div>
       </main>
