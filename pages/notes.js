@@ -37,7 +37,7 @@ const Home = () => {
               key={note.__resourcePath}
               target="_blank"
               rel="noopener noreferrer"
-              className={`mt-10 cursor-pointer block bg-dark relative ${styles.note}`}
+              className={`relative bg-dark flex flex-col ${styles.note}`}
             >
               <div className="text-sm font-light text-light mb-8 flex">
                 {format(note.createdAt, 'MMMM dd, yyyy')}
@@ -47,10 +47,8 @@ const Home = () => {
                 className="text-"
                 dangerouslySetInnerHTML={{ __html: note.excerpt }}
               ></div>
-              <div className="mt-5 flex justify-between">
-                <div className="text-link inline-block truncate flex-shrink">
-                  <span className="link ">{note.link}</span>
-                </div>
+              <div className="text-link inline-block truncate mt-6 flex-shrink">
+                <span className="link ">{note.link}</span>
               </div>
             </a>
           ))}

@@ -19,9 +19,12 @@
 .note {
   @apply border-solid;
   @apply rounded-md;
-  @apply p-6;
+  @apply p-5;
   @apply border-opacity-50;
-  @apply -mx-5;
+  @apply -mx-4;
+  @apply mt-10;
+  @apply cursor-pointer;
+
   @screen md {
     @apply mx-0;
   }
