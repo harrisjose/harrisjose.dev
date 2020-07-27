@@ -44,7 +44,7 @@ const Home = () => {
                 <span className="ml-auto">{getIcon(note.link)}</span>
               </div>
               <div
-                className="text-"
+                className="md:text-lg"
                 dangerouslySetInnerHTML={{ __html: note.excerpt }}
               ></div>
               <div className="text-link inline-block truncate mt-6 flex-shrink">

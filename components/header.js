@@ -5,7 +5,7 @@ const ThemeSwitcher = dynamic(() => import('@/components/theme-switcher'), {
 })
 
 const Header = () => (
-  <nav className="header py-5 px-8 md:px-0 -mx-8">
+  <nav className="header py-5 px-8 md:px-0 -mx-8 z-10">
     <div className="max-w-screen-md mx-auto flex items-center justify-start md:justify-end">
       <Link href="/">
         <a aria-describedby="Go to Home Page">Home</a>
