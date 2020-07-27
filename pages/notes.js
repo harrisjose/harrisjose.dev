@@ -11,7 +11,7 @@ import styles from './notes.module.scss'
 const getIcon = (url = '') => {
   let isTwitter = url.includes('twitter.com')
   let Icon = isTwitter ? Twitter : LinkIcon
-  return <Icon className="h-4 w-4 mr-1 inline" />
+  return <Icon className="h-4 w-4 mr-1 inline opacity-75" />
 }
 
 const Home = () => {
@@ -61,7 +61,3 @@ const Home = () => {
 }
 
 export default Home
-
-// function formatPath(p) {
-//   return p.replace(/\.md$/, '')
-// }
