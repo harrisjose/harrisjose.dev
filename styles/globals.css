@@ -102,8 +102,15 @@ footer {
 }
 .link:hover,
 .link:focus {
-  color: #fff;
-  box-shadow: inset 0 -1.25em 0 0 var(--text-link);
+  /* color: #fff; */
+  /* box-shadow: inset 0 -1.25em 0 0 var(--text-link); */
   border-bottom-color: var(--text-link);
   outline: 0;
+}
+
+.tag {
+  margin: 4px 8px 4px 0;
+  padding: 2px 6px;
+  line-height: 1.6;
+  @apply text-xs rounded-sm;
 }

@@ -3,7 +3,7 @@ import Head from '@/components/head'
 import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-
+import Tag from '@/components/tag'
 import { format, parseISO } from 'date-fns'
 import { formatPath } from 'utils'
 import { frontMatter } from './blog/**/*.mdx'
@@ -35,6 +35,11 @@ const Home = () => {
                     className="text-lg mt-1 text-light"
                     dangerouslySetInnerHTML={{ __html: page.excerpt }}
                   ></div>
+                  <div className="mt-2">
+                    {page.tags.map((tag) => (
+                      <Tag key={page.__resourcePath + tag}>{tag}</Tag>
+                    ))}
+                  </div>
                   <div className="mt-5 text-sm text-light">
                     {format(parseISO(page.date), 'MMMM dd, yyyy')}
                     {` • `}

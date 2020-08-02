@@ -1,20 +1,6 @@
 .notes {
   @apply mt-3;
   @apply relative;
-
-  &:before {
-    content: '';
-    display: block;
-    width: 1px;
-    background-color: var(--secondary);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    @screen md {
-      left: 2rem;
-    }
-  }
 }
 .note {
   @apply border-solid;

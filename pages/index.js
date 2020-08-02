@@ -15,7 +15,7 @@ const Home = () => {
   const articles = [...frontMatter]
     .filter((page) => !page.draft)
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
-    .slice(0, 2)
+    .slice(0, 3)
 
   return (
     <Page>

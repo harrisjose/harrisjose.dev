@@ -16,12 +16,13 @@ export default (frontMatter) => ({ children: content }) => (
       <h1 className="text-4xl md:text-5xl mt-8 mb-0 font-bold leading-tight">
         {frontMatter.title}
       </h1>
-      <div className="text-sm font-light text-light mt-5 mb-12">
-        {format(frontMatter.date, 'MMMM dd, yyyy')}
+
+      <div className="text-sm font-light text-light mt-5">
+        Published on {format(frontMatter.date, 'MMMM dd, yyyy')}
         {` • `}
         {frontMatter.readingTime}
       </div>
-
+      <div className="text-sm font-light text-light mt-12 mb-12"></div>
       {content}
     </main>
     <Footer />
