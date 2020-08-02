@@ -1,6 +1,6 @@
-const marked = require('marked')
 const withMdxEnhanced = require('next-mdx-enhanced')
 const readingTime = require('reading-time')
+const marked = require('marked')
 const matter = require('gray-matter')
 
 const autLinkHeaders = [
@@ -43,6 +43,9 @@ module.exports = withMdxEnhanced({
     phase: 'both',
   },
 })({
+  experimental: {
+    modern: true,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

@@ -23,32 +23,70 @@ const Home = () => (
           href="https://facilio.com"
           target="_blank"
           rel="noopener noreferrer"
-          aria-describedby="Open company website in a new tab"
+          aria-describedby="Open facilio.com in a new tab"
         >
           @FacilioInc
         </a>
         , where we build apps for facility management and remote operations. I
         mostly work with JavaScript, building infrastructure and tooling for our
-        client teams.
+        front-end team.
       </p>
       <p className="mt-6">
         Before Facilio, I used to work at{' '}
         <a
-          className="text-special"
+          className="text-link"
           href="https://zoho.com"
           target="_blank"
           rel="noopener noreferrer"
-          aria-describedby="Open company website in a new tab"
+          aria-describedby="Open zoho.com in a new tab"
         >
           @zoho
         </a>{' '}
-        on their Finance Suite of Products. I was one of the primary developers
-        for Zoho Checkout, a service that helps non-profits and small businesses
-        accept payments easily.
+        on their{' '}
+        <a
+          className="link"
+          href="https://www.zoho.com/financeplus/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="Open zoho.com in a new tab"
+        >
+          Finance Suite of Products.
+        </a>{' '}
+        I was one of the primary developers for Zoho Checkout, a service that
+        helps non-profits and small businesses accept payments easily.
       </p>
       <p className="mt-6">
-        You can get in touch with me on twitter or via email. If you’re looking
-        for my resume, you can find it here.
+        You can get in touch with me on{' '}
+        <a
+          className="text-link"
+          href="https://twitter.com/harrispjose"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="Open twitter profile"
+        >
+          twitter
+        </a>{' '}
+        or via{' '}
+        <a
+          className="text-link"
+          href="mailto:harrisjose@outlook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="Open email"
+        >
+          email.
+        </a>
+        {/* If you’re looking for my resume, you can find it{' '}
+        <a
+          className="link"
+          href=""
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-describedby="Download resume"
+        >
+          here
+        </a>
+        . */}
       </p>
     </main>
 
