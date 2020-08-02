@@ -6,6 +6,7 @@ import Head from '@/components/head'
 import { format, parseISO } from 'date-fns'
 import { frontMatter } from './**/*.mdx'
 import { formatPath } from 'utils'
+import Tag from '@/components/tag'
 
 import Github from '@/icons/github.svg'
 import Twitter from '@/icons/twitter.svg'
@@ -27,7 +28,7 @@ const Home = () => {
         <div className="mt-24">
           <h1 className="text-5xl font-semibold">Hi, I'm Harris</h1>
           <div className="text-xl max-w-screen-sm">
-            I’m a frontend engineer working on web apps at{' '}
+            I’m a frontend engineer working at{' '}
             <a
               className="text-special"
               href="https://facilio.com"
@@ -36,7 +37,8 @@ const Home = () => {
               aria-describedby="Open company website in a new tab"
             >
               @FacilioInc
-            </a>
+            </a>{' '}
+            where I help build fast and responsive web experiences.
           </div>
           <div className="flex mt-8">
             <a
@@ -73,11 +75,16 @@ const Home = () => {
             <div key={page.__resourcePath}>
               <Link href={formatPath(page.__resourcePath)}>
                 <div className="mb-10 cursor-pointer">
-                  <a className="text-xl font-medium">{page.title}</a>
+                  <a className="text-2xl font-medium">{page.title}</a>
                   <div
                     className="text-lg mt-1 text-light"
                     dangerouslySetInnerHTML={{ __html: page.excerpt }}
                   ></div>
+                  <div className="mt-2">
+                    {page.tags.map((tag) => (
+                      <Tag key={page.__resourcePath + tag}>{tag}</Tag>
+                    ))}
+                  </div>
                   <div className="mt-5 text-sm text-light">
                     {format(parseISO(page.date), 'MMMM dd, yyyy')}
                     {` • `}
