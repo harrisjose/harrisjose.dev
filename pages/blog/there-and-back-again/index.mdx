@@ -12,15 +12,17 @@ excerpt: Moving this blog to Next.js and Vercel from Gatsby and notes on what el
 draft: false
 ---
 
+I moved by blog to Next.js from [Gatsby](/blog/revamping-the-blog-with-gatsby).
+
 Why Next.js? I don't really have a good answer for this except that in retrospect, I did not enjoy having to work with graphQL just to display stuff on my blog. Besides that, Vercel has a generous free tier (and comes with serverless functions) and if you're moving to vercel you might as well use Next.js.
 
 ## Configuring Next.js
 
-Moving over the posts was straightforward since I already had them as `.md` files. I don't really like how the default way to use mdx in Next is to export your front-matter as a javascript object. I used `next-mdx-advanced` to get around this (there's also the addded advantage of being able to use custom layouts based on a front-matter key).
+Moving over the blog posts was straightforward since I already had them as `.md` files. I don't really like how the default way to use mdx in Next is to export your front-matter as a javascript object. I used `next-mdx-advanced` to get around this (there's also the addded advantage of being able to use custom layouts based on a front-matter key).
 
 Over the last year, I've stopped writing css a lot. This is partly due to my [frustration with how easy it is to mess up](/blog/css-in-js-ftw) and partly because I only write javascript at work. Tailwind seemed like a godsend and while I did take some time to get used to it I'm glad there exists something like this.
 
-The only thing I don't entirely liked setting up is syntax highlighting. Getting [prism working was a breeze](https://github.com/mapbox/rehype-prism) but I'm pretty sure we need a better way to share prism themes than copy pasting entire css files and adding them as a stylesheet. This got messy very fast because I had to get two sets of styles for the dark and light themes and make them look consistent. Note to self: build a library that generates prism theme files from json.
+The only thing I didn't entirely like setting up was syntax highlighting. Getting [prism working was a breeze](https://github.com/mapbox/rehype-prism) but I'm pretty sure we need a better way to share prism themes than copy pasting entire css files and adding them as a stylesheet. This got messy very fast because I had to get two sets of styles for the dark and light themes and make them look consistent. Note to self: build a library that generates prism theme files from json.
 
 A lot of the configuration for Next.js is direclty based on what Lee Rob does on his [site](https://github.com/leerob/leerob.io). I haven't thought about adding analytics yet, because fathom is expensive and Google Analytics is a steaming pile of hot mess. I should probably look into building out a way to just track page views.
 
@@ -36,6 +38,6 @@ I'm still not entirely sure as to how I want sharing snippets of code to work, s
 
 ## What's Missing
 
-I really want to implement _indieweb_ stuff like webmentions and microformats. I'm defenitely not going to add comments to this site so webmentions could be a really good way to enable discussions around articles. I love how [Max Böck](https://mxb.dev/blog/using-webmentions-on-static-sites/#h-further-resources) has used webmentions and I'm looking forwarrd to setting that up.
+I really want to implement _indieweb_ stuff like webmentions and microformats. I'm defenitely not going to add comments to this site, and webmentions could be a really good way to enable discussions around articles. I love how [Max Böck](https://mxb.dev/blog/using-webmentions-on-static-sites/#h-further-resources) has used webmentions and I'm looking forward to setting that up.
 
-If I ever get around to building out a way to track page views I'd also like to work on having a stats page like [this](https://leerob.io/dashboard).
+If I ever get around to building out something to track page views I'd also like to work on having a stats page like [this](https://leerob.io/dashboard).
