@@ -27,7 +27,7 @@ const Home = () => {
       <main className="container max-w-screen-md mx-auto mb-16">
         <div className="mt-24">
           <h1 className="text-5xl font-semibold">Hi, I'm Harris</h1>
-          <div className="text-xl max-w-screen-sm">
+          <div className="text-xl md:text-2xl md:mt-3 max-w-screen-sm">
             I’m a frontend engineer working at{' '}
             <a
               className="text-special"
@@ -75,9 +75,11 @@ const Home = () => {
             <div key={page.__resourcePath}>
               <Link href={formatPath(page.__resourcePath)}>
                 <div className="mb-10 cursor-pointer">
-                  <a className="text-2xl font-medium">{page.title}</a>
+                  <a className="text-xl md:text-2xl font-medium">
+                    {page.title}
+                  </a>
                   <div
-                    className="text-lg mt-1 text-light"
+                    className="text-base md:text-lg mt-1 text-light"
                     dangerouslySetInnerHTML={{ __html: page.excerpt }}
                   ></div>
                   <div className="mt-2">
