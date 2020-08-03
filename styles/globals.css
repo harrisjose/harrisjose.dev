@@ -112,5 +112,5 @@ footer {
   margin: 4px 8px 4px 0;
   padding: 3px 6px;
   line-height: 1.6;
-  @apply text-xs font-hairline rounded-sm;
+  @apply text-xs font-thin rounded-sm;
 }
