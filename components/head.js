@@ -22,20 +22,11 @@ export default ({ children }) => (
       }}
     ></script>
 
-    {/* Google Analytics
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-111519502-2"
+      defer
+      data-website-id="233c882a-636a-4913-bbbc-520b60bc00db"
+      src="https://umami.harrisjose.dev/umami.js"
     ></script>
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-111519502-2');
-        `,
-      }}
-    ></script> */}
   </Head>
 )
