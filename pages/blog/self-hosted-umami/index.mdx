@@ -32,17 +32,19 @@ Umami works with both MySql and PostgreSQL so pick one of those. In the **DB ins
 
 ![Enable public access](/images/self-hosted-umami/rds-public-access.png)
 
+For a more detailed guide to setting up RDS, click [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)
+
+## Creating the tables
+
+To create the tables needed for umami, you'll need to run a few queries. I really recommend [Postico](https://eggerapps.at/postico/) if you dont already have a client that connects to postgres. Connect to your databse with the **endpoint** of the RDS instance and run the queries in _umami/prisma/schema.postgresql.prisma_.
+
 ## Configuring umami
 
 Deploying on vercel is easy. All you have to do is click on **Import project** from the dashboard, select **Import Git Repository** and paste in `https://github.com/mikecao/umami`. Vercel will let you fork it and then instantly start a new deployment.
 
 You'll also need to add a few environment variables to let umami know how to connect to your database. Just follow the instructions [here](https://github.com/mikecao/umami#configure-umami) and that's pretty much it.
 
-> If you already have an site running on vercel, a cool thing you can do is set it to run under a subdomain. Mine runs at [umami.harrisjose.dev](https://umami.harrisjose.dev). Just enter the subdomain in your settings in vercel and you should be ready to go.
-
-## Creating the tables
-
-To create the tables needed for umami, you'll need to run a few queries. I really recommend [Postico](https://eggerapps.at/postico/) if you dont already have a client that connects to postgres. Connect to your databse and copy paste the queries from `umami/prisma/schema.postgresql.prisma` or the mysql equivalent.
+> If you already have an site running on vercel, a cool thing you can do is set it to run under a subdomain. Mine runs at [umami.harrisjose.dev](https://umami.harrisjose.dev). Just enter the domain in Settings -> Domains and you should be ready to go.
 
 ## Adding the tracker to your website
 
