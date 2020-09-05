@@ -1,0 +1,53 @@
+---
+title: Self hosted website analytics, for free
+date: 2020-09-05
+tags:
+  - next.js
+  - serverless
+  - prisma
+  - aws
+excerpt: How to set up analytics with Umami, Vercel and Amazon RDS in under an hour.
+draft: false
+---
+
+I was looking at alternatives to Google analytics recently and found [Fathom](https://usefathom.com/), [Plausible](https://plausible.io/) and Umami. [Umami](https://umami.is/) is an analytics service built with next.js and [prisma](https://www.prisma.io/), both of which I use regulary in side-projects, so that helped tip the scales in it's favour.
+
+## How is this free?
+
+Vercel has free hosting for hobby projects and so we only have the database part to figure out. There are a lot of services that provide managed databases and [some of them](https://github.com/ripienaar/free-for-dev#dbaas) come with a free tier, so pick any one of these and you're good to go.
+
+I went with [Amazon RDS](https://aws.amazon.com/rds/) because I've been looking to get more familiar with the various services AWS has and this seemed like a good chace to play around (RDS is not [free forever](https://aws.amazon.com/free/?all-free-tier.sort-by=item.additionalFields.SortRank&all-free-tier.sort-order=asc&awsf.Free%20Tier%20Types=tier%2312monthsfree) though, so thats something to keep in mind).
+
+## Setting up the database instance
+
+Once you've logged in to the AWS console, look for RDS open up the dashboard. Click on **Create database** and you'll have to option to create an instance (You can click on **Easy Create** because there isn't a lot we will be changing here).
+
+![Create Database](/images/self-hosted-umami/rds-create-1.png)
+
+Umami works with both MySql and PostgreSQL so pick one of those. In the **DB instance size** options, pick the **Free tier**. Then give the instance a name and set the default user and password.
+
+![Credentials for database](/images/self-hosted-umami/rds-create-3.png)
+
+> The database is private by default but we need to make it public so that it can be accessed it from within the umami instance. To do this, click on 'Modify' in the database screen and change the **Public accessibility** setting to **Yes**.
+
+![Enable public access](/images/self-hosted-umami/rds-public-access.png)
+
+## Configuring umami
+
+Deploying on vercel is easy. All you have to do is click on **Import project** from the dashboard, select **Import Git Repository** and paste in `https://github.com/mikecao/umami`. Vercel will let you fork it and then instantly start a new deployment.
+
+You'll also need to add a few environment variables to let umami know how to connect to your database. Just follow the instructions [here](https://github.com/mikecao/umami#configure-umami) and that's pretty much it.
+
+> If you already have an site running on vercel, a cool thing you can do is set it to run under a subdomain. Mine runs at [umami.harrisjose.dev](https://umami.harrisjose.dev). Just enter the subdomain in your settings in vercel and you should be ready to go.
+
+## Creating the tables
+
+To create the tables needed for umami, you'll need to run a few queries. I really recommend [Postico](https://eggerapps.at/postico/) if you dont already have a client that connects to postgres. Connect to your databse and copy paste the queries from `umami/prisma/schema.postgresql.prisma` or the mysql equivalent.
+
+## Adding the tracker to your website
+
+Now that you have everything set up to start using umami, login in to the umami deployment from vercel and login with the default username and password.
+
+Go into settings and add a website. Then click on the `</>` icon to get the tracking code. You'll need to add this to all your pages. Once the tracker is live you should instantly start seeing data in the umami dashboard.
+
+![Umami Dashboard](/images/self-hosted-umami/umami-dashboard.png)

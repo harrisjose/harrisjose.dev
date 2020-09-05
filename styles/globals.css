@@ -9,6 +9,7 @@ html {
 html[data-theme='dark'] {
   --primary: #222831;
   --secondary: #414853;
+  --attention: #303a48;
   --text-primary: #f8f8f8;
   --text-secondary: #b0b0b7;
   --text-highlight: #ff3184;
@@ -19,6 +20,7 @@ html,
 html[data-theme='light'] {
   --primary: #fff;
   --secondary: #e3e8ee;
+  --attention: rgb(235, 248, 255);
   --text-primary: #424874;
   --text-secondary: #565d95;
   --text-highlight: #774eed;

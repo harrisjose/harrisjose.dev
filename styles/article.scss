@@ -39,6 +39,28 @@
     @apply mb-8;
   }
 
+  blockquote {
+    @apply flex;
+    @apply items-center;
+    @apply relative;
+    @apply overflow-hidden;
+    @apply mb-10;
+    @apply mt-10;
+    padding: 0.75rem 1rem 0.75rem 1rem;
+    width: 98%;
+
+    p,
+    span,
+    div {
+      @apply mt-0;
+      @apply mb-0;
+      @apply text-base;
+    }
+
+    background-color: var(--attention);
+    border-left: 4px solid var(--text-link);
+  }
+
   pre {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     @apply my-10;
