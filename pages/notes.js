@@ -4,7 +4,14 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import Twitter from '@/icons/twitter.svg'
 import LinkIcon from '@/icons/link.svg'
+import SeachIcon from '@/icons/search.svg'
+import CloseIcon from '@/icons/close-r.svg'
+
 import { format } from 'date-fns'
+import { isEmpty } from 'utils'
+import { useRef } from 'react'
+import useSearch from '@/components/use-search'
+
 import { frontMatter } from './notes/*.md'
 import styles from './notes.module.scss'
 
@@ -19,6 +26,14 @@ const Home = () => {
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   )
 
+  const { search, reset, term, result } = useSearch(list, {
+    keys: ['excerpt', 'link'],
+  })
+
+  const isSearchActive = !isEmpty(term)
+
+  const searchInputRef = useRef(null)
+
   return (
     <Page>
       <Head>
@@ -28,10 +43,32 @@ const Home = () => {
 
       <main className="container max-w-screen-md mx-auto mb-16">
         <div className="mt-12 md:mt-24">
-          <h1 className="text-5xl font-semibold">Notes</h1>
+          <h1 className="text-5xl font-semibold flex">Notes</h1>
+          <div className={`${styles.seachInput}`} ref={searchInputRef}>
+            <input
+              type="text"
+              value={term}
+              placeholder="Search"
+              autoFocus
+              onChange={(event) => search(event.target.value)}
+            ></input>
+
+            {isSearchActive ? (
+              <span
+                className="text-light cursor-pointer"
+                onClick={() => reset()}
+              >
+                <CloseIcon />
+              </span>
+            ) : (
+              <span className="text-light">
+                <SeachIcon />
+              </span>
+            )}
+          </div>
         </div>
         <div className={styles.notes}>
-          {list.map((note) => (
+          {result.map((note) => (
             <a
               href={note.link}
               key={note.__resourcePath}
