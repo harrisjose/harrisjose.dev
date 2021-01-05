@@ -49,7 +49,6 @@ const Home = () => {
               type="text"
               value={term}
               placeholder="Search"
-              autoFocus
               onChange={(event) => search(event.target.value)}
             ></input>
 
