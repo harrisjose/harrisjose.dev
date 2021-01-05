@@ -4,7 +4,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { format } from 'date-fns'
 
-export default (frontMatter) => ({ children: content }) => (
+const Blog = ({ children: content, frontMatter }) => (
   <Page className="flex flex-col">
     <Head>
       <title>{frontMatter.title} | Harris Jose</title>
@@ -28,3 +28,5 @@ export default (frontMatter) => ({ children: content }) => (
     <Footer />
   </Page>
 )
+
+export default Blog
