@@ -7,15 +7,6 @@ const HeadWrapper = ({ children }) => (
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-    {!isDev && (
-      <script
-        async
-        defer
-        data-website-id="233c882a-636a-4913-bbbc-520b60bc00db"
-        src="https://umami.harrisjose.dev/umami.js"
-      ></script>
-    )}
-
     <script
       dangerouslySetInnerHTML={{
         __html: `
