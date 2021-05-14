@@ -117,7 +117,7 @@ const handler = async (req, res) => {
         return
       }
 
-      reply(`Published to harrisjose.dev/notes`)
+      reply(`Published!`)
     } else {
       reply(
         'This is a private bot 😅. Check out harrisjose.dev to learn how to make your own.'

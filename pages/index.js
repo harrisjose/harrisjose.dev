@@ -28,7 +28,7 @@ const Home = () => {
         <div className="mt-24">
           <h1 className="text-5xl font-semibold">Hi, I'm Harris</h1>
           <div className="text-xl md:text-2xl md:mt-3 max-w-screen-sm">
-            I’m a frontend engineer working at{' '}
+            I’m a software engineer working at{' '}
             <a
               className="text-special"
               href="https://facilio.com"
