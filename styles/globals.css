@@ -32,17 +32,6 @@ body {
   background-color: var(--primary);
 }
 
-body,
-nav,
-div,
-pre,
-code,
-p,
-span,
-a {
-  transition: background-color 0.3s, color 0.05s;
-}
-
 svg {
   @apply w-6 h-6;
 }
