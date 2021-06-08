@@ -1,0 +1,31 @@
+---
+title: Is Node.js really single-threaded?
+date: 2021-06-08
+tags:
+  - node.js
+  - event-loop
+  - libuv
+  - single-thread
+excerpt: Well, it depends..
+draft: false
+---
+
+The answer - taking a page out of the senior engineer playbook - is, it depends.
+
+Unless you explicitly write code that uses multiple threads (see `web-worker threads` and `cluster`), the javascript you write executes in the event loop which runs on a single thread. If there is a blocking operation in your code, then nothing else will happen until it finishes.
+
+But this does not mean the entirety of Node.js works this way. Enter libuv, the async I/O library that is a part of Node.js. libuv maintains a pool of worker threads that are used by Node.js to perform long-running operations in the background, without blocking its main thread. Like disk I/O for example.
+
+To quote from [this](https://stackoverflow.com/questions/22644328/when-is-the-thread-pool-used/22644735#22644735) excellent stack overflow answer,
+
+> Certain functions and modules, usually written in C/C++, support asynchronous I/O. When you call these functions and methods, they internally manage to pass the call on to a worker thread. For instance, when you use the fs module to request a file, the fs module passes that call on to a worker thread, and that worker waits for its response, which it then presents back to the event loop that has been churning on without it in the meantime.
+
+## So how does all of this work?
+
+Consider a call to `fs.readdir` that the event loop needs to pass on to a worker thread. The thread pool is used through submitting a work request to a queue. A work request here typically has a function that needs to be executed in a thread and a callback.
+
+When at least one thread in the thread pool is idle, the first work request from the queue is assigned to that thread. If there are no free threads, the work request waits in the queue untill a thread frees up. Once the function running on the separate thread finishes, the callback from the work request is called with the results.
+
+![Simplified diagram of execution flow for using the thread pool](/images/nodejs-single-threaded/threads.png)
+
+For a more in-depth explanation on why this matters and a good example using libuv, [this article](https://web.archive.org/web/20201108131651/https://kariera.future-processing.pl/blog/on-problems-with-threads-in-node-js/) is worth reading.
