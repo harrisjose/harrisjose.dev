@@ -16,9 +16,13 @@ const Header = () => (
       <Link href="/notes">
         <a aria-describedby="Go to Notes">Notes</a>
       </Link>
-      <Link href="/about">
-        <a aria-describedby="Go to About Page">About</a>
-      </Link>
+
+      <a
+        href="https://updates.harrisjose.dev"
+        aria-describedby="Go to About Page"
+      >
+        About
+      </a>
       <ThemeSwitcher className="ml-auto md:ml-5 cursor-pointer"></ThemeSwitcher>
     </div>
   </nav>
