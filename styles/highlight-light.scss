@@ -16,13 +16,6 @@ html[data-theme='light'] {
     hyphens: none;
   }
 
-  pre[class*='language-']::selection,
-  pre[class*='language-'] ::selection,
-  code[class*='language-']::selection,
-  code[class*='language-'] ::selection {
-    background: #c1def1;
-  }
-
   /* Code blocks */
   pre[class*='language-'] {
     padding: 1em;
@@ -124,33 +117,5 @@ html[data-theme='light'] {
   .token.directive.tag .tag {
     background: #ffff00;
     color: #393a34;
-  }
-
-  /* overrides color-values for the Line Numbers plugin
- * http://prismjs.com/plugins/line-numbers/
- */
-  .line-numbers .line-numbers-rows {
-    border-right-color: #a5a5a5;
-  }
-
-  .line-numbers-rows > span:before {
-    color: #2b91af;
-  }
-
-  /* overrides color-values for the Line Highlight plugin
-* http://prismjs.com/plugins/line-highlight/
-*/
-  .line-highlight {
-    background: rgba(193, 222, 241, 0.2);
-    background: -webkit-linear-gradient(
-      left,
-      rgba(193, 222, 241, 0.2) 70%,
-      rgba(221, 222, 241, 0)
-    );
-    background: linear-gradient(
-      to right,
-      rgba(193, 222, 241, 0.2) 70%,
-      rgba(221, 222, 241, 0)
-    );
   }
 }

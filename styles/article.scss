@@ -72,6 +72,11 @@
     @apply text-sm;
   }
 
+  code {
+    @apply rounded;
+    @apply text-sm;
+  }
+
   .remark-code-title {
     background: var(--secondary);
     color: var(--text-secondary);
