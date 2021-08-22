@@ -3,14 +3,9 @@ import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import Head from '@/components/head'
-import { format, parseISO } from 'date-fns'
+import SocialHeader from '@/components/social-header'
 import { frontMatter } from './**/*.mdx'
 import { formatPath } from 'utils'
-import Tag from '@/components/tag'
-
-import Github from '@/icons/github.svg'
-import Twitter from '@/icons/twitter.svg'
-import LinkedIn from '@/icons/linkedin.svg'
 
 const Home = () => {
   const articles = [...frontMatter]
@@ -25,10 +20,14 @@ const Home = () => {
       <Header />
 
       <main className="container max-w-screen-md mx-auto mb-16">
-        <div className="mt-24">
-          <h1 className="text-5xl font-semibold">Hi, I'm Harris</h1>
-          <div className="text-xl md:text-2xl md:mt-3 max-w-screen-sm">
-            I’m a software engineer working at{' '}
+        <div className="aurora"></div>
+
+        <section className="mt-24">
+          <h1 className="text-5xl md:text-6xl font-semibold">
+            Hi, I'm Harris.
+          </h1>
+          <div className="text-lg text-light mt-3 max-w-screen-md">
+            I’m a senior software engineer working at{' '}
             <a
               className="text-special"
               href="https://facilio.com"
@@ -38,65 +37,56 @@ const Home = () => {
             >
               @FacilioInc
             </a>{' '}
-            where I help build fast and responsive web experiences.
+            where I help build fast and responsive web experiences. I mostly do
+            front-end development using React and Vue.js, and I’m a huge
+            Javascript nerd.
           </div>
-          <div className="flex mt-8">
+          <div className="text-lg text-light mt-3 max-w-screen-md">
+            I share what I learn on my{' '}
+            <Link href={'/blog'} aria-describedby="Go to blog">
+              <a className="text-link">Blog</a>
+            </Link>{' '}
+            and write about what I'm working on at{' '}
             <a
-              href="https://github.com/harrisjose"
+              className="text-link"
+              href="https://updates.harrisjose.dev"
               target="_blank"
               rel="noopener noreferrer"
-              aria-describedby="Open twitter profile in a new tab"
+              aria-describedby="Open my Polywork profile on a new tab"
             >
-              <Github className="h-6 w-6 mr-6"></Github>
+              Polywork
             </a>
-            <a
-              href="https://twitter.com/harrispjose"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-describedby="Open twitter profile in a new tab"
-            >
-              <Twitter className="h-6 w-6 mr-6"></Twitter>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/harrisjose"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-describedby="Open twitter profile in a new tab"
-            >
-              <LinkedIn className="h-6 w-6 mr-6"></LinkedIn>
-            </a>
+            .
           </div>
-        </div>
-        <div className="mt-24 flex flex-col">
+
+          <SocialHeader />
+        </section>
+        <section className="mt-24 flex flex-col">
           <div className="text-sm font-bold text-light mb-8 uppercase">
             Recent Articles
           </div>
-          {articles.map((page) => (
-            <div key={page.__resourcePath}>
-              <Link href={formatPath(page.__resourcePath)}>
-                <div className="mb-10 cursor-pointer">
-                  <a className="text-xl md:text-2xl font-medium">
-                    {page.title}
-                  </a>
-                  <div
-                    className="text-base md:text-lg mt-1 text-light"
-                    dangerouslySetInnerHTML={{ __html: page.excerpt }}
-                  ></div>
-                  <div className="mt-2">
-                    {page.tags.map((tag) => (
-                      <Tag key={page.__resourcePath + tag}>{tag}</Tag>
-                    ))}
+          <div className="md:flex md:flex-row md:flex-wrap">
+            {articles.map((page) => (
+              <Link
+                href={formatPath(page.__resourcePath)}
+                key={page.__resourcePath}
+              >
+                <article className="article-card bg-frost cursor-pointer">
+                  <div className="mb-4 md:mb-10">
+                    <h3 className="text-2xl font-semibold">{page.title}</h3>
+                    <div
+                      className="text-base mt-3 text-light"
+                      dangerouslySetInnerHTML={{ __html: page.excerpt }}
+                    ></div>
+                    <div className="mt-5 text-sm text-light">
+                      {page.readingTime}
+                    </div>
                   </div>
-                  <div className="mt-5 text-sm text-light">
-                    {format(parseISO(page.date), 'MMMM dd, yyyy')}
-                    {` • `}
-                    {page.readingTime}
-                  </div>
-                </div>
+                </article>
               </Link>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </section>
       </main>
 
       <Footer />

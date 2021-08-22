@@ -3,20 +3,18 @@
   @apply relative;
 }
 .note {
-  border-width: 1px;
-  border-color: var(--secondary);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-
-  @apply border-solid;
-  @apply rounded-md;
   @apply p-5;
-  @apply border-opacity-50;
   @apply -mx-4;
-  @apply mt-10;
+  @apply mt-6;
   @apply cursor-pointer;
+
+  transition: transform 0.2s ease-in-out;
 
   @screen md {
     @apply mx-0;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   p + p {
@@ -36,22 +34,14 @@
   }
 
   input {
-    @apply rounded-md;
+    @apply rounded;
     @apply text-base;
     @apply py-3;
     @apply px-5;
     @apply inline-block;
     @apply w-full;
     @apply outline-none;
-
     color: var(--text-primary);
-    background-color: var(--primary);
-    border-width: 1px;
-    border-color: var(--secondary);
-
-    &:focus {
-      border-color: var(--text-link);
-    }
   }
   span {
     position: absolute;
