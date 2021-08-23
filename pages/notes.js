@@ -10,7 +10,7 @@ import CloseIcon from '@/icons/close-r.svg'
 import { format } from 'date-fns'
 import { isEmpty } from 'utils'
 import { useRef } from 'react'
-import useSearch from '@/components/use-search'
+import useSearch from 'hooks/use-search'
 
 import { frontMatter } from './notes/*.md'
 import styles from './notes.module.scss'
@@ -42,6 +42,8 @@ const Home = () => {
       <Header />
 
       <main className="container max-w-screen-md mx-auto mb-16">
+        <div className="aurora"></div>
+
         <div className="mt-12 md:mt-24">
           <h1 className="text-5xl font-semibold flex">Notes</h1>
           <div className={`${styles.seachInput}`} ref={searchInputRef}>
@@ -50,6 +52,7 @@ const Home = () => {
               value={term}
               placeholder="Search"
               onChange={(event) => search(event.target.value)}
+              className="bg-frost"
             ></input>
 
             {isSearchActive ? (
@@ -73,7 +76,7 @@ const Home = () => {
               key={note.__resourcePath}
               target="_blank"
               rel="noopener noreferrer"
-              className={`relative bg-dark flex flex-col ${styles.note}`}
+              className={`bg-frost flex flex-col ${styles.note}`}
             >
               <div className="text-sm font-light text-light mb-8 flex">
                 {format(note.createdAt, 'MMMM dd, yyyy')}
@@ -83,7 +86,7 @@ const Home = () => {
                 className="md:text-lg"
                 dangerouslySetInnerHTML={{ __html: note.excerpt }}
               ></div>
-              <div className="text-link inline-block truncate mt-6 flex-shrink">
+              <div className="text-link inline-block truncate mt-4 flex-shrink">
                 <span className="link ">{note.link}</span>
               </div>
             </a>

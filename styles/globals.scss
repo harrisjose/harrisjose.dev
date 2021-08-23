@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-padding-top: 75px;
+}
+
+html,
+html[data-theme='light'] {
+  --primary: rgb(255, 255, 255);
+  --secondary: rgb(227, 232, 238);
+  --attention: rgb(235, 248, 255);
+  --text-primary: rgb(66, 72, 116);
+  --text-secondary: rgb(86, 93, 149);
+  --text-highlight: rgb(119, 78, 237);
+  --text-link: rgb(50, 116, 214);
+}
+
+html[data-theme='dark'] {
+  --primary: rgb(34, 40, 49);
+  --secondary: rgb(65, 72, 83);
+  --attention: rgb(48, 58, 72);
+  --text-primary: rgb(248, 248, 248);
+  --text-secondary: rgb(176, 176, 183);
+  --text-highlight: rgb(255, 49, 132);
+  --text-link: rgb(0, 174, 249);
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--primary);
+}
+
+svg {
+  @apply w-6 h-6;
+}
+
+.bg-dark {
+  background-color: var(--primary);
+}
+
+.bg-light {
+  background-color: var(--secondary);
+}
+
+.bg-frost {
+  background-color: rgba(227, 232, 238, 0.3);
+}
+html[data-theme='light'] .bg-frost {
+  backdrop-filter: saturate(150%);
+}
+html[data-theme='dark'] .bg-frost {
+  background-color: rgba(56, 63, 74, 0.25);
+}
+
+.text-dark {
+  color: var(--text-primary);
+}
+
+.text-light {
+  color: var(--text-secondary);
+}
+
+.text-special {
+  color: var(--text-highlight);
+}
+
+.text-link {
+  color: var(--text-link);
+}
+
+.header {
+  @apply sticky w-screen top-0 text-xl;
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: saturate(80%) blur(20px);
+}
+
+html[data-theme='dark'] .header {
+  background-color: rgba(34, 40, 49, 0.8);
+}
+
+.header a {
+  @apply cursor-pointer;
+}
+
+.header a:not(:first-of-type) {
+  @apply ml-5;
+}
+
+footer {
+  @apply text-center py-3;
+}
+
+.link {
+  color: var(--text-link);
+  box-shadow: inset 0 -1px 0 0 currentColor;
+  border-bottom: 1px solid currentColor;
+}
+.link:hover,
+.link:focus {
+  border-bottom-color: var(--text-link);
+  outline: 0;
+}
+
+.tag {
+  margin: 4px 8px 4px 0;
+  padding: 3px 6px;
+  line-height: 1.6;
+  @apply text-xs font-light rounded-sm;
+}
+@screen md {
+  .tag {
+    @apply font-thin;
+  }
+}
+
+.article-card {
+  @apply p-5 mb-6 rounded;
+  transition: transform 0.2s ease-in-out;
+
+  @screen md {
+    @apply p-8;
+    @apply mr-6;
+    width: 40%;
+    min-height: 340px;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.aurora {
+  position: fixed;
+  backface-visibility: hidden;
+  bottom: -10%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/aurora.webp');
+  background-position-x: center;
+  z-index: -1;
+}

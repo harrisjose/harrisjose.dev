@@ -22,32 +22,33 @@ const Home = () => {
       <Header />
 
       <main className="container max-w-screen-md mx-auto mb-16">
+        <div className="aurora"></div>
+
         <div className="mt-12 md:mt-24">
           <h1 className="text-5xl font-semibold">Blog</h1>
         </div>
-        <div className="mt-2">
+        <div className="mt-5 md:flex md:flex-row md:flex-wrap">
           {list.map((page) => (
-            <div key={page.__resourcePath}>
-              <Link href={formatPath(page.__resourcePath)}>
-                <div className="mt-10 cursor-pointer">
-                  <a className="text-2xl font-medium">{page.title}</a>
+            <Link
+              href={formatPath(page.__resourcePath)}
+              key={page.__resourcePath}
+            >
+              <article className="article-card bg-frost cursor-pointer">
+                <div className="mb-4 md:mb-10">
+                  <div className="text-sm text-light">
+                    {format(parseISO(page.date), 'MMMM dd, yyyy')}
+                  </div>
+                  <h2 className="text-2xl font-semibold mt-5">{page.title}</h2>
                   <div
-                    className="text-lg mt-1 text-light"
+                    className="text-lg text-light mt-3"
                     dangerouslySetInnerHTML={{ __html: page.excerpt }}
                   ></div>
-                  <div className="mt-2">
-                    {page.tags.map((tag) => (
-                      <Tag key={page.__resourcePath + tag}>{tag}</Tag>
-                    ))}
-                  </div>
                   <div className="mt-5 text-sm text-light">
-                    {format(parseISO(page.date), 'MMMM dd, yyyy')}
-                    {` • `}
                     {page.readingTime}
                   </div>
                 </div>
-              </Link>
-            </div>
+              </article>
+            </Link>
           ))}
         </div>
       </main>
