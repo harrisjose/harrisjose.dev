@@ -4,7 +4,6 @@
 }
 .note {
   @apply p-5;
-  @apply -mx-4;
   @apply mt-6;
   @apply cursor-pointer;
 
@@ -28,7 +27,6 @@
   @apply mt-6;
   @apply mb-3;
 
-  @apply -mx-4;
   @screen md {
     @apply mx-0;
   }
