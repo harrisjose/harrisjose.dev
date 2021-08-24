@@ -64,7 +64,7 @@
   pre {
     font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
     @apply my-10;
-    @apply rounded-md;
+    @apply rounded;
   }
 
   pre,
@@ -82,7 +82,7 @@
     color: var(--text-secondary);
     @apply py-2;
     @apply px-4;
-    @apply rounded-t-md;
+    @apply rounded-t;
     @apply rounded-b-none;
     @apply mt-8;
   }
