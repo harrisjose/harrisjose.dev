@@ -3,7 +3,7 @@ const readingTime = require('reading-time')
 const marked = require('marked')
 const matter = require('gray-matter')
 
-const autLinkHeaders = [
+const autoLinkHeaders = [
   require('remark-autolink-headings'),
   {
     behavior: 'append',
@@ -34,7 +34,7 @@ module.exports = withMdxEnhanced({
   fileExtensions: ['md', 'mdx'],
   remarkPlugins: [
     require('remark-slug'),
-    autLinkHeaders,
+    autoLinkHeaders,
     require('remark-code-titles'),
   ],
   rehypePlugins: [require('@mapbox/rehype-prism')],
