@@ -6,15 +6,13 @@ tags:
   - lambda
   - unzip
   - serverless
-excerpt: Notes on how stuff can..not work when trying to unzip a zip inside a lambda.
+excerpt: Notes on how stuff can..not work when trying to unzip inside a lambda.
 draft: false
 ---
 
-I've been looking into automating our front-end deployments using AWS CodePipeline. We already use S3 as our static file store and CodeBuild to run the builds so CodePipeline was the next step we needed to figure out for CI/CD.
+While automating our deployments via AWS CodePipeline, we needed a way to get the zip file, extract it and upload it to an S3 Bucket that serves our static files.
 
-I did not find a way to disable encryption for the artifacts from CodePipeline without messing up some of our existing build setups. So we needed to figure out how to get the zip file from S3, unzip it and put the contents on to the bucket which hosts our static files.
-
-The first version I came up with was using a lambda to unzip the file using streams. Get a read stream for the zip which is then piped to node-unzipper. Each file extracted is then uploaded into the target S3 bucket as they are unzipped.
+The first version I came up with was using a lambda to unzip the file using streams. Use the S3.getObject method to get a read stream for the zip and pipe the stream to `node-unzipper`. For every file node-unzipper emits, upload it into the S3 bucket with the `S3.upload` method (which accepts a read-stream).
 
 ```javascript:index.js
 const AWS = require('aws-sdk')
@@ -54,11 +52,11 @@ exports.handler = async () => {
 }
 ```
 
-The good thing about streams is that you dont really load the entire file into memory before you unzip it. So the default 128mb a lambda starts with works for our use case. Downloading the file to disk and unzipping it is an option but I don't really like using the disk from within serverless functions. It just feels dirty.
+I like this approach. The good thing about streams is that you don't load the entire file into memory before unzipping it. It also means that the default 128M is enough for the lambda to run. So low memory footprint, no hacky usage of `tmp/`, and easy to read code.
 
-Huge bummer though, the lambda always stops running after a few files are extracted. I'm not entirely sure if this is a bug within lambda that somehow leads it to think that the [entire event-loop is flushed](https://github.com/ZJONSSON/node-unzipper/issues/189#issuecomment-640144517). Also it turns out zip files aren't really suited to be [unzipped via a stream](https://github.com/thejoshwolfe/yauzl#no-streaming-unzip-api).
+Huge letdown though, the lambda always stopped running after a few files were extracted. I'm not entirely sure if this is a bug within lambda that somehow leads it to think that the [entire event-loop is flushed](https://github.com/ZJONSSON/node-unzipper/issues/189#issuecomment-640144517). I'm leaning towards it being a case where it's impossible to extract the zip file without reading it in its entirety. Zip files aren't suited to be unzipped via streams because of the reasons outlined [here](https://github.com/thejoshwolfe/yauzl#no-streaming-unzip-api).
 
-The final version I ended up with uses a buffer to store the entire zip file in memory, then uses yauzl to get a readstream of every extracted file. I did have to increase the memory of the lambda to 256mb though but besides that this works as expected.
+The final version I ended up with uses a buffer to store the entire zip file in memory, then uses yauzl to get a read-stream of every extracted file. I did have to increase the memory of the lambda to 256MB though.
 
 ```javascript:index.js
 const yauzl = require('yauzl')

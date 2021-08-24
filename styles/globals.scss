@@ -108,9 +108,7 @@ footer {
   padding: 3px 6px;
   line-height: 1.6;
   @apply text-xs font-light rounded-sm;
-}
-@screen md {
-  .tag {
+  @screen md {
     @apply font-thin;
   }
 }
