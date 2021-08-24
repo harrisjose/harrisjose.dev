@@ -30,7 +30,7 @@ html[data-theme='dark'] {
 
   :not(pre) > code[class*='language-'],
   pre[class*='language-'] {
-    background: #1e232b;
+    background: var(--primary);
   }
 
   /* Inline code */

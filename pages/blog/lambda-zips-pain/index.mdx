@@ -26,7 +26,10 @@ exports.handler = async () => {
 
   let promises = []
 
-  const readStream = S3.getObject({ Key: zipFileName, Bucket: source }).createReadStream()
+  const readStream = S3.getObject({
+    Key: zipFileName,
+    Bucket: source
+  }).createReadStream()
 
   await readStream
     .pipe(unzipper.Parse({ forceStream: true }))
@@ -70,7 +73,10 @@ exports.handler = async () => {
   const source = //source bucket
   const destination = //destination bucket
 
-  const { Body: content } = await S3.getObject({ Key: zipFileName, Bucket: source }).promise()
+  const { Body: content } = await S3.getObject({
+    Key: zipFileName,
+    Bucket: source
+  }).promise()
 
   const zip = await fromBuffer(content)
 

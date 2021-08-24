@@ -18,7 +18,7 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-  --primary: rgb(34, 40, 49);
+  --primary: rgb(21 21 21);
   --secondary: rgb(65, 72, 83);
   --attention: rgb(48, 58, 72);
   --text-primary: rgb(248, 248, 248);
@@ -77,7 +77,7 @@ html[data-theme='dark'] .bg-frost {
 }
 
 html[data-theme='dark'] .header {
-  background-color: rgba(34, 40, 49, 0.8);
+  background-color: rgba(21, 21, 21, 0.75);
 }
 
 .header a {

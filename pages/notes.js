@@ -3,6 +3,7 @@ import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import Twitter from '@/icons/twitter.svg'
+import Github from '@/icons/github.svg'
 import LinkIcon from '@/icons/link.svg'
 import SeachIcon from '@/icons/search.svg'
 import CloseIcon from '@/icons/close-r.svg'
@@ -17,7 +18,8 @@ import styles from './notes.module.scss'
 
 const getIcon = (url = '') => {
   let isTwitter = url.includes('twitter.com')
-  let Icon = isTwitter ? Twitter : LinkIcon
+  let isGH = url.includes('github.com')
+  let Icon = isTwitter ? Twitter : isGH ? Github : LinkIcon
   return <Icon className="h-4 w-4 mr-1 inline opacity-75" />
 }
 
