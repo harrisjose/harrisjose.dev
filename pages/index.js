@@ -49,7 +49,7 @@ const Home = () => {
             and write about what I'm working on at{' '}
             <a
               className="text-link"
-              href="https://updates.harrisjose.dev"
+              href="https://work.harrisjose.dev"
               target="_blank"
               rel="noopener noreferrer"
               aria-describedby="Open my Polywork profile on a new tab"

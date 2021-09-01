@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import Polywork from '@/icons/polywork.svg'
+
 const ThemeSwitcher = dynamic(() => import('@/components/theme-switcher'), {
   ssr: false,
 })
@@ -18,10 +20,12 @@ const Header = () => (
       </Link>
 
       <a
-        href="https://updates.harrisjose.dev"
+        href="https://work.harrisjose.dev"
         aria-describedby="Go to About Page"
+        className="flex items-center text-lg font-medium"
       >
-        About
+        <Polywork className="h-4 w-4 mr-2" />
+        Polywork
       </a>
       <ThemeSwitcher className="ml-auto md:ml-5 cursor-pointer"></ThemeSwitcher>
     </div>
