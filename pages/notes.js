@@ -1,3 +1,9 @@
+import { format } from 'date-fns'
+import { isEmpty } from 'utils'
+import { useRef } from 'react'
+import useSearch from 'hooks/use-search'
+import { NOTES, getNoteSlug, getMdx } from 'utils/mdx'
+
 import Head from '@/components/head'
 import Page from '@/components/page'
 import Header from '@/components/header'
@@ -7,14 +13,20 @@ import Github from '@/icons/github.svg'
 import LinkIcon from '@/icons/link.svg'
 import SeachIcon from '@/icons/search.svg'
 import CloseIcon from '@/icons/close-r.svg'
-
-import { format } from 'date-fns'
-import { isEmpty } from 'utils'
-import { useRef } from 'react'
-import useSearch from 'hooks/use-search'
-
-import { frontMatter } from './notes/*.md'
 import styles from './notes.module.scss'
+
+export function getStaticProps() {
+  const notes = NOTES.map((filePath) => {
+    const { data } = getMdx(filePath)
+
+    return {
+      ...data,
+      slug: getNoteSlug(filePath),
+    }
+  })
+
+  return { props: { notes } }
+}
 
 const getIcon = (url = '') => {
   let isTwitter = url.includes('twitter.com')
@@ -23,8 +35,8 @@ const getIcon = (url = '') => {
   return <Icon className="h-4 w-4 mr-1 inline opacity-75" />
 }
 
-const Home = () => {
-  const list = [...frontMatter].sort(
+const Home = ({ notes }) => {
+  const list = notes.sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   )
 
@@ -75,13 +87,13 @@ const Home = () => {
           {result.map((note) => (
             <a
               href={note.link}
-              key={note.__resourcePath}
+              key={note.slug}
               target="_blank"
               rel="noopener noreferrer"
               className={`bg-frost flex flex-col ${styles.note}`}
             >
               <div className="text-sm font-light text-light mb-8 flex">
-                {format(note.createdAt, 'MMMM dd, yyyy')}
+                {format(note.date, 'MMMM dd, yyyy')}
                 <span className="ml-auto">{getIcon(note.link)}</span>
               </div>
               <div

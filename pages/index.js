@@ -4,11 +4,23 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import Head from '@/components/head'
 import SocialHeader from '@/components/social-header'
-import { frontMatter } from './**/*.mdx'
-import { formatPath } from 'utils'
+import { POSTS, getMdx, getPostSlug } from 'utils/mdx'
 
-const Home = () => {
-  const articles = [...frontMatter]
+export function getStaticProps() {
+  const posts = POSTS.map((filePath) => {
+    const { data } = getMdx(filePath)
+
+    return {
+      ...data,
+      slug: getPostSlug(filePath),
+    }
+  })
+
+  return { props: { posts } }
+}
+
+const Home = ({ posts }) => {
+  const articles = posts
     .filter((page) => !page.draft)
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
     .slice(0, 3)
@@ -67,10 +79,7 @@ const Home = () => {
           </div>
           <div className="md:flex md:flex-row md:flex-wrap">
             {articles.map((page) => (
-              <Link
-                href={formatPath(page.__resourcePath)}
-                key={page.__resourcePath}
-              >
+              <Link href={page.slug} key={page.slug}>
                 <article className="article-card bg-frost cursor-pointer">
                   <div className="mb-4 md:mb-10">
                     <h3 className="text-2xl font-semibold">{page.title}</h3>

@@ -8,7 +8,6 @@
         "plugins": ["line-numbers"],
         "css": true
       }
-    ],
-    "import-glob-array"
+    ]
   ]
 }

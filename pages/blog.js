@@ -4,11 +4,23 @@ import Page from '@/components/page'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { format, parseISO } from 'date-fns'
-import { formatPath } from 'utils'
-import { frontMatter } from './blog/**/*.mdx'
+import { getMdx, POSTS, getPostSlug } from 'utils/mdx'
 
-const Home = () => {
-  const list = [...frontMatter]
+export function getStaticProps() {
+  const posts = POSTS.map((filePath) => {
+    const { data } = getMdx(filePath)
+
+    return {
+      ...data,
+      slug: getPostSlug(filePath),
+    }
+  })
+
+  return { props: { posts } }
+}
+
+const Home = ({ posts }) => {
+  const list = posts
     .filter((page) => !page.draft)
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
 
@@ -28,10 +40,7 @@ const Home = () => {
         </div>
         <div className="mt-5 md:flex md:flex-row md:flex-wrap">
           {list.map((page) => (
-            <Link
-              href={formatPath(page.__resourcePath)}
-              key={page.__resourcePath}
-            >
+            <Link href={`blog/${page.slug}`} key={page.slug}>
               <article className="article-card bg-frost cursor-pointer">
                 <div className="mb-4 md:mb-10">
                   <div className="text-sm text-light">
