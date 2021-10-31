@@ -40,7 +40,7 @@ const createPost = async (content) => {
   const fileContent = `${frontmatter}\n\n${text}\n`
   const fileName = format(createdAt, 'yyyy-MM-dd-Hmm') + '.md'
 
-  const url = `https://api.github.com/repos/harrisjose/blog2/contents/pages/notes/${fileName}`
+  const url = `https://api.github.com/repos/harrisjose/blog2/contents/notes/${fileName}`
 
   const payload = {
     message: 'New note via NotesBot',
