@@ -79,7 +79,7 @@ const Home = ({ posts }) => {
           </div>
           <div className="md:flex md:flex-row md:flex-wrap">
             {articles.map((page) => (
-              <Link href={page.slug} key={page.slug}>
+              <Link href={`blog/${page.slug}`} key={page.slug}>
                 <article className="article-card bg-frost cursor-pointer">
                   <div className="mb-4 md:mb-10">
                     <h3 className="text-2xl font-semibold">{page.title}</h3>
