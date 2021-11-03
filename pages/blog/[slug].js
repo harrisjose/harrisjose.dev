@@ -45,11 +45,11 @@ const Blog = ({ content, frontMatter }) => (
         },
         images: [
           {
-            url: 'https://harrisjose.dev/images/opengraph.png',
+            url: `https://opengraph.harrisjose.dev?title=${frontMatter.title}&description=${frontMatter.excerpt_raw}`,
             alt:
               'Harris Jose | Senior Software Engineer at Facilio | React, Node.js, JavaScript',
-            width: 1024,
-            height: 1024,
+            width: 1200,
+            height: 600,
           },
         ],
       }}

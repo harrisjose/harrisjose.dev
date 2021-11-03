@@ -20,6 +20,11 @@ export const insertFrontMatter = (mdxContent, frontMatter = {}) => {
       ? marked(matter(mdxContent).content)
       : marked(frontMatter.excerpt || '')
 
+  let excerpt_raw =
+    frontMatter.layout == 'note'
+      ? matter(mdxContent).content
+      : frontMatter.excerpt || ''
+
   let date =
     frontMatter.layout === 'note'
       ? Number(frontMatter.createdAt)
@@ -28,6 +33,7 @@ export const insertFrontMatter = (mdxContent, frontMatter = {}) => {
   return {
     readingTime: readingTime(mdxContent).text,
     excerpt,
+    excerpt_raw,
     date,
   }
 }
