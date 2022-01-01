@@ -100,7 +100,7 @@ const Home = ({ notes }) => {
                 className="md:text-lg"
                 dangerouslySetInnerHTML={{ __html: note.excerpt }}
               ></div>
-              <div className="text-link inline-block truncate mt-4 flex-shrink">
+              <div className="text-link inline-block truncate mt-4 shrink">
                 <span className="link ">{note.link}</span>
               </div>
             </a>
