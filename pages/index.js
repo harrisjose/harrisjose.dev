@@ -1,12 +1,15 @@
+import React from 'react'
 import Link from 'next/link'
 import Page from '@/components/page'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
 import Head from '@/components/head'
-import SocialHeader from '@/components/social-header'
-import { POSTS, getMdx, getPostSlug } from 'utils/mdx'
+import Contact from '@/components/contact'
+import Now from '@/components/now'
 
-export function getStaticProps() {
+import { format, parseISO } from 'date-fns'
+import { POSTS, getMdx, getPostSlug } from 'utils/mdx'
+import { getCurrentPlaying } from 'utils/spotify'
+
+export async function getStaticProps() {
   const posts = POSTS.map((filePath) => {
     const { data } = getMdx(filePath)
 
@@ -16,12 +19,20 @@ export function getStaticProps() {
     }
   })
 
-  return { props: { posts } }
+  let song = null
+  try {
+    const data = await getCurrentPlaying()
+    if (data) song = data
+  } catch (error) {
+    console.log(error)
+  }
+
+  return { props: { posts, song }, revalidate: 30 }
 }
 
-const Home = ({ posts }) => {
+const Home = ({ posts, song }) => {
   const articles = posts
-    .filter((page) => !page.draft)
+    .filter((page) => !page.draft && page.featured)
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
     .slice(0, 3)
 
@@ -29,76 +40,111 @@ const Home = ({ posts }) => {
     <Page>
       <Head></Head>
 
-      <Header />
+      <main className="container max-w-screen-sm mx-auto mb-16">
+        <section className="mt-20">
+          <h1 className="font-semibold text-lg">Harris Jose</h1>
+          <div className="text-light">Software Engineer</div>
+        </section>
 
-      <main className="container max-w-screen-md mx-auto mb-16">
-        <div className="aurora"></div>
-
-        <section className="mt-24">
-          <h1 className="text-5xl md:text-6xl font-semibold">
-            Hi, I'm Harris.
-          </h1>
-          <div className="text-lg text-light mt-3 max-w-screen-md">
-            I’m a senior software engineer working at{' '}
+        <section className="mt-20">
+          <h2 className="font-semibold">About</h2>
+          <div className="text-light mt-6">
+            Building fast and responsive web experiences. Thinking about
+            developer tools, user interfaces and design systems. Senior software
+            engineer at{' '}
             <a
-              className="text-special"
-              href="https://facilio.com"
+              href="https://chroniclehq.com"
               target="_blank"
               rel="noopener noreferrer"
               aria-describedby="Open company website in a new tab"
+              className="underline hover:text-dark"
             >
-              @FacilioInc
-            </a>{' '}
-            where I help build fast and responsive web experiences. I mostly do
-            front-end development using React and Vue.js, and I’m a huge
-            Javascript nerd.
-          </div>
-          <div className="text-lg text-light mt-3 max-w-screen-md">
-            I share what I learn on my{' '}
-            <Link href={'/blog'} aria-describedby="Go to blog">
-              <a className="text-link">Blog</a>
-            </Link>{' '}
-            and write about what I'm working on at{' '}
-            <a
-              className="text-link"
-              href="https://work.harrisjose.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-describedby="Open my Polywork profile on a new tab"
-            >
-              Polywork
+              Chronicle HQ
             </a>
             .
           </div>
-
-          <SocialHeader />
         </section>
-        <section className="mt-24 flex flex-col">
-          <div className="text-sm font-bold text-light mb-8 uppercase">
-            Recent Articles
-          </div>
-          <div className="md:flex md:flex-row md:flex-wrap">
+
+        <Contact />
+
+        <Now song={song} />
+
+        <section className="mt-16">
+          <h2 className="font-semibold">Writing</h2>
+          <div className="mt-6 grid grid-cols-split gap-x-9 gap-y-9">
             {articles.map((page) => (
-              <Link href={`blog/${page.slug}`} key={page.slug}>
-                <article className="article-card bg-frost cursor-pointer">
-                  <div className="mb-4 md:mb-10">
-                    <h3 className="text-2xl font-semibold">{page.title}</h3>
-                    <div
-                      className="text-base mt-3 text-light"
-                      dangerouslySetInnerHTML={{ __html: page.excerpt }}
-                    ></div>
-                    <div className="mt-5 text-sm text-light">
-                      {page.readingTime}
-                    </div>
-                  </div>
-                </article>
-              </Link>
+              <React.Fragment key={page.slug}>
+                <div className="text-dim">
+                  {format(parseISO(page.date), 'MMMM, yyyy')}
+                </div>
+                <div>
+                  <Link href={`/blog/${page.slug}`}>
+                    <a className="text-light underline hover:text-dark">
+                      {page.title}
+                    </a>
+                  </Link>
+                  <div
+                    className="mt-2.5 text-dim"
+                    dangerouslySetInnerHTML={{ __html: page.excerpt }}
+                  ></div>
+                </div>
+              </React.Fragment>
             ))}
+            <div></div>
+            <Link href={`/blog/`}>
+              <a className="text-dim underline italic hover:text-light">
+                more →
+              </a>
+            </Link>
+          </div>
+        </section>
+
+        <section className="mt-16">
+          <h2 className="font-semibold">Work</h2>
+
+          <div className="mt-6 grid grid-cols-split gap-x-9 gap-y-9">
+            <div className="text-dim">2021 - now</div>
+            <div className="flex flex-col">
+              <a className="text-light underline">Chronicle HQ</a>
+              <div className="text-dim text-sm mt-1.5">Remote</div>
+              <div className="text-light mt-3"></div>
+            </div>
+
+            <div className="text-dim">2019 - 2021</div>
+            <div className="flex flex-col">
+              <a className="text-light underline">Facilio</a>
+              <div className="text-dim text-sm mt-1.5">
+                Chennai, India & Remote
+              </div>
+              <div className="text-light mt-3">
+                Core developer in the platform team focussing on front-end
+                architecture.
+              </div>
+            </div>
+
+            <div className="text-dim">2018 - 2019</div>
+            <div className="flex flex-col">
+              <a className="text-light underline">Zoho Payments & Banking</a>
+              <div className="text-dim text-sm mt-1.5">Chennai, India</div>
+              <div className="text-light mt-3">
+                Worked on payment gateway and bank integrations for the Finance
+                Suite of products.
+              </div>
+            </div>
+
+            <div className="text-dim">2016 - 2018</div>
+            <div className="flex flex-col">
+              <a className="text-light underline">
+                Zoho Checkout & Subscriptions
+              </a>
+              <div className="text-dim text-sm mt-1.5">Chennai, India</div>
+              <div className="text-light mt-3">
+                Primary front-end engineer for Zoho Checkout.
+              </div>
+            </div>
           </div>
         </section>
       </main>
-
-      <Footer />
     </Page>
   )
 }

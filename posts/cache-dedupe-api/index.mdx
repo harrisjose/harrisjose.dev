@@ -1,14 +1,15 @@
 ---
-title: A request cache for client side apps in under 40LOC
-date: 2020-05-24
+title: A request cache for client side apps in under 40 LOC
+date: 2020-08-24
 tags:
   - axois
   - cache
   - query
   - swr
   - api
-excerpt: Cache strategy to avoid duplicate requests and making components easier to reason about.
+excerpt: Cache strategy to avoid duplicate requests and facilitate local reasoning.
 draft: false
+featured: true
 ---
 
 Caching and de-duping HTTP requests helps [facilitate local reasoning](https://sophiebits.com/2020/01/01/fast-maintainable-db-patterns.html 'Fast and maintainable patterns for fetching from a database - Sophie Alpert'). This means that you think about a part of your code in isolation, without holding the entire system in your head. I'll get into more of why this has a huge impact on the way you code at the end of this post.
