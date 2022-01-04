@@ -85,28 +85,6 @@
 }
 
 @layer components {
-  .header {
-    @apply sticky w-screen top-0 text-xl;
-    background-color: rgba(255, 255, 255, 0.65);
-    backdrop-filter: saturate(80%) blur(20px);
-  }
-
-  html[data-theme='dark'] .header {
-    background-color: rgba(21, 21, 21, 0.75);
-  }
-
-  .header a {
-    @apply cursor-pointer;
-  }
-
-  .header a:not(:first-of-type) {
-    @apply ml-5;
-  }
-
-  footer {
-    @apply text-center py-3;
-  }
-
   .link {
     color: var(--text-link);
     box-shadow: inset 0 -1px 0 0 currentColor;
@@ -116,30 +94,5 @@
   .link:focus {
     border-bottom-color: var(--text-link);
     outline: 0;
-  }
-
-  .tag {
-    margin: 4px 8px 4px 0;
-    padding: 3px 6px;
-    line-height: 1.6;
-    @apply text-xs font-light rounded-sm;
-    @screen md {
-      @apply font-extralight;
-    }
-  }
-
-  .article-card {
-    @apply p-5 mb-6 rounded;
-    transition: transform 0.2s ease-in-out;
-
-    @screen md {
-      @apply p-8;
-      @apply mr-6;
-      width: 40%;
-      min-height: 340px;
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
   }
 }

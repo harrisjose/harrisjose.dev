@@ -7,7 +7,6 @@ import Now from '@/components/now'
 
 import { format, parseISO } from 'date-fns'
 import { POSTS, getMdx, getPostSlug } from 'utils/mdx'
-import { getCurrentPlaying } from 'utils/spotify'
 
 export async function getStaticProps() {
   const posts = POSTS.map((filePath) => {
@@ -19,18 +18,10 @@ export async function getStaticProps() {
     }
   })
 
-  let song = null
-  try {
-    const data = await getCurrentPlaying()
-    if (data) song = data
-  } catch (error) {
-    console.log(error)
-  }
-
-  return { props: { posts, song }, revalidate: 30 }
+  return { props: { posts } }
 }
 
-const Home = ({ posts, song }) => {
+const Home = ({ posts }) => {
   const articles = posts
     .filter((page) => !page.draft && page.featured)
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
@@ -41,7 +32,7 @@ const Home = ({ posts, song }) => {
       <Head></Head>
 
       <main className="container max-w-screen-sm mx-auto mb-16">
-        <section className="mt-20">
+        <section className="mt-20 relative">
           <h1 className="font-semibold text-lg">Harris Jose</h1>
           <div className="text-light">Software Engineer</div>
         </section>
@@ -67,7 +58,7 @@ const Home = ({ posts, song }) => {
 
         <Contact />
 
-        <Now song={song} />
+        <Now />
 
         <section className="mt-16">
           <h2 className="font-semibold">Writing</h2>
@@ -97,6 +88,16 @@ const Home = ({ posts, song }) => {
               </a>
             </Link>
           </div>
+        </section>
+
+        <section className="mt-16">
+          <h2 className="font-semibold">Links</h2>
+          <Link href={'/notes'}>
+            <div className="mt-6 text-dim hover:text-light cursor-pointer">
+              <span className="italic">Highlights</span> from stuff I've read
+              over the past couple of years →
+            </div>
+          </Link>{' '}
         </section>
 
         <section className="mt-16">
