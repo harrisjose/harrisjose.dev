@@ -7,7 +7,13 @@ import { format, parseISO } from 'date-fns'
 import { NextSeo } from 'next-seo'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
-import { POSTS, getMdx, getPostSlug, getPostPath, mdxOptions } from 'utils/mdx'
+import {
+  POSTS,
+  getMdx,
+  getPostSlug,
+  getPostPath,
+  getMdxOptions,
+} from 'utils/mdx'
 
 export async function getStaticPaths() {
   return {
@@ -24,7 +30,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { slug } }) {
   const { content, data } = getMdx(getPostPath(slug))
-  const mdxSource = await serialize(content, { mdxOptions })
+  const mdxOptions = await getMdxOptions()
+  const mdxSource = await serialize(content, {
+    mdxOptions,
+  })
   return { props: { content: mdxSource, frontMatter: data } }
 }
 

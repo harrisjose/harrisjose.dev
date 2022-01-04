@@ -65,14 +65,13 @@
   }
 
   pre {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    @apply my-10;
-    @apply rounded;
-  }
-
-  pre,
-  pre > code {
+    @apply font-mono;
+    @apply my-10 p-8;
     @apply text-sm;
+
+    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
   }
 
   code {
@@ -81,6 +80,7 @@
   }
 
   .remark-code-title {
+    display: none;
     background: var(--secondary);
     color: var(--text-secondary);
     @apply py-2;
@@ -88,10 +88,5 @@
     @apply rounded-t;
     @apply rounded-b-none;
     @apply mt-8;
-  }
-
-  .remark-code-title + pre {
-    @apply mt-0;
-    @apply rounded-t-none;
   }
 }
