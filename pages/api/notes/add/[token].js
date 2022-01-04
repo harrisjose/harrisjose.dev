@@ -3,6 +3,10 @@ import got from 'got'
 import { format } from 'date-fns'
 import { isEmpty, makeYaml } from 'utils'
 
+const USER_ID = process.env.USER_ID
+const LOCAL_TOKEN = process.env.LOCAL_TOKEN
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN
+
 const getContent = (message) => {
   let { entities, text } = message
 
@@ -55,7 +59,7 @@ const createPost = async (content) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/vnd.github.v3+json',
-      Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      Authorization: `token ${GITHUB_TOKEN}`,
     },
     body: JSON.stringify(payload),
   }
@@ -87,7 +91,7 @@ const handler = async (req, res) => {
     body: update,
   } = req
 
-  if (token !== process.env.LOCAL_TOKEN || isEmpty(update)) {
+  if (token !== LOCAL_TOKEN || isEmpty(update)) {
     console.log(token)
     res.status(500).end('Invalid Auth')
   } else {
@@ -100,7 +104,7 @@ const handler = async (req, res) => {
 
     const reply = createReply(res, chatId, messageId)
 
-    if (String(userId) === process.env.USER_ID) {
+    if (String(userId) === USER_ID) {
       let content = {}
 
       try {

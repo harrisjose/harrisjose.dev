@@ -16,6 +16,7 @@ export async function getServerSideProps({ res }) {
   res.setHeader('Content-Type', 'text/xml')
   res.write(genertateFeed(posts, FEED_TYPE.ATOM))
   res.end()
+
   return { props: {} }
 }
 

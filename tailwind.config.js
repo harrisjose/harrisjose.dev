@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ['./pages/**/*.js', './layouts/**/*.js', './components/**/*.js'],
+  content: ['./pages/**/*.js', './layouts/**/*.js', './components/**/*.js'],
   theme: {
     extend: {},
     screens: {
@@ -8,6 +8,5 @@ module.exports = {
       lg: '1024px',
     },
   },
-  variants: {},
   plugins: [],
 }

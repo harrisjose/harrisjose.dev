@@ -1,8 +1,10 @@
+import React from 'react'
 import Link from 'next/link'
 import Head from '@/components/head'
 import Page from '@/components/page'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Bio from '@/components/bio'
+import Now from '@/components/now'
+import Contact from '@/components/contact'
 import { format, parseISO } from 'date-fns'
 import { getMdx, POSTS, getPostSlug } from 'utils/mdx'
 
@@ -20,48 +22,45 @@ export function getStaticProps() {
 }
 
 const Home = ({ posts }) => {
-  const list = posts
+  const articles = posts
     .filter((page) => !page.draft)
     .sort((a, b) => Number(new Date(b.date)) - Number(new Date(a.date)))
 
   return (
     <Page>
       <Head>
-        <title>Blog | Harris Jose</title>
+        <title>Writing | Harris Jose</title>
       </Head>
 
-      <Header />
-
-      <main className="container max-w-screen-md mx-auto mb-16">
-        <div className="aurora"></div>
-
-        <div className="mt-12 md:mt-24">
-          <h1 className="text-5xl font-semibold">Blog</h1>
-        </div>
-        <div className="mt-5 md:flex md:flex-row md:flex-wrap">
-          {list.map((page) => (
-            <Link href={`blog/${page.slug}`} key={page.slug}>
-              <article className="article-card bg-frost cursor-pointer">
-                <div className="mb-4 md:mb-10">
-                  <div className="text-sm text-light">
-                    {format(parseISO(page.date), 'MMMM dd, yyyy')}
-                  </div>
-                  <h2 className="text-2xl font-semibold mt-5">{page.title}</h2>
+      <main className="container max-w-screen-sm mx-auto mb-16">
+        <section className="mt-20">
+          <h1 className="text-lg font-semibold">Writing</h1>
+          <div className="mt-6 grid grid-cols-split gap-x-9 gap-y-9">
+            {articles.map((page) => (
+              <React.Fragment key={page.slug}>
+                <div className="text-dim">
+                  {format(parseISO(page.date), 'MMMM, yyyy')}
+                </div>
+                <div>
+                  <Link href={`blog/${page.slug}`}>
+                    <a className="text-light underline hover:text-dark">
+                      {page.title}
+                    </a>
+                  </Link>
                   <div
-                    className="text-lg text-light mt-3"
+                    className="mt-2.5 text-dim"
                     dangerouslySetInnerHTML={{ __html: page.excerpt }}
                   ></div>
-                  <div className="mt-5 text-sm text-light">
-                    {page.readingTime}
-                  </div>
                 </div>
-              </article>
-            </Link>
-          ))}
-        </div>
-      </main>
+              </React.Fragment>
+            ))}
+          </div>
+        </section>
 
-      <Footer />
+        <Bio />
+        <Contact />
+        <Now />
+      </main>
     </Page>
   )
 }

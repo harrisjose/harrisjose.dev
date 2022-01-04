@@ -1,16 +1,16 @@
+import Link from 'next/link'
 import { format } from 'date-fns'
 import { isEmpty } from 'utils'
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import useSearch from 'hooks/use-search'
 import { NOTES, getNoteSlug, getMdx } from 'utils/mdx'
 
 import Head from '@/components/head'
 import Page from '@/components/page'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Contact from '@/components/contact'
+import Now from '@/components/now'
 import Twitter from '@/icons/twitter.svg'
 import Github from '@/icons/github.svg'
-import LinkIcon from '@/icons/link.svg'
 import SeachIcon from '@/icons/search.svg'
 import CloseIcon from '@/icons/close-r.svg'
 import styles from './notes.module.scss'
@@ -31,8 +31,8 @@ export function getStaticProps() {
 const getIcon = (url = '') => {
   let isTwitter = url.includes('twitter.com')
   let isGH = url.includes('github.com')
-  let Icon = isTwitter ? Twitter : isGH ? Github : LinkIcon
-  return <Icon className="h-4 w-4 mr-1 inline opacity-75" />
+  let Icon = isTwitter ? Twitter : isGH ? Github : null
+  return Icon ? <Icon className="h-4 w-4 mr-2 inline opacity-75" /> : ''
 }
 
 const Home = ({ notes }) => {
@@ -53,20 +53,16 @@ const Home = ({ notes }) => {
       <Head>
         <title>Notes | Harris Jose</title>
       </Head>
-      <Header />
 
-      <main className="container max-w-screen-md mx-auto mb-16">
-        <div className="aurora"></div>
-
-        <div className="mt-12 md:mt-24">
-          <h1 className="text-5xl font-semibold flex">Notes</h1>
+      <main className="container max-w-screen-sm mx-auto mb-16">
+        <div className="mt-20">
+          <h1 className="text-lg font-semibold">Notes</h1>
           <div className={`${styles.seachInput}`} ref={searchInputRef}>
             <input
               type="text"
               value={term}
               placeholder="Search"
               onChange={(event) => search(event.target.value)}
-              className="bg-frost"
             ></input>
 
             {isSearchActive ? (
@@ -83,32 +79,52 @@ const Home = ({ notes }) => {
             )}
           </div>
         </div>
-        <div className={styles.notes}>
+
+        <div className="mt-8 grid grid-cols-split gap-x-9 gap-y-9">
           {result.map((note) => (
-            <a
-              href={note.link}
-              key={note.slug}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`bg-frost flex flex-col ${styles.note}`}
-            >
-              <div className="text-sm font-light text-light mb-8 flex">
-                {format(note.date, 'MMMM dd, yyyy')}
-                <span className="ml-auto">{getIcon(note.link)}</span>
+            <React.Fragment key={note.slug}>
+              <div className="text-dim">{format(note.date, 'dd/MM/yyyy')}</div>
+              <div className={styles.note}>
+                <div dangerouslySetInnerHTML={{ __html: note.excerpt }}></div>
+                <div className="mt-4 w-full truncate">
+                  <span className="ml-auto">{getIcon(note.link)}</span>
+                  <a
+                    href={note.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-dim hover:text-light"
+                  >
+                    {note.link}
+                  </a>
+                </div>
               </div>
-              <div
-                className="md:text-lg"
-                dangerouslySetInnerHTML={{ __html: note.excerpt }}
-              ></div>
-              <div className="text-link inline-block truncate mt-4 flex-shrink">
-                <span className="link ">{note.link}</span>
-              </div>
-            </a>
+            </React.Fragment>
           ))}
         </div>
-      </main>
 
-      <Footer />
+        <section className="mt-20">
+          <Link href="/">
+            <a className="text-lg font-semibold">Harris Jose</a>
+          </Link>
+          <div className="text-light">
+            Software Engineer at{' '}
+            <a
+              href="https://chroniclehq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-describedby="Open company website in a new tab"
+              className="underline hover:text-dark"
+            >
+              Chronicle HQ
+            </a>
+            .
+          </div>
+        </section>
+
+        <Contact />
+
+        <Now />
+      </main>
     </Page>
   )
 }

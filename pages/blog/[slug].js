@@ -1,12 +1,13 @@
 import Head from '@/components/head'
 import Page from '@/components/page'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Contact from '@/components/contact'
+import Now from '@/components/now'
 import { format, parseISO } from 'date-fns'
 import { NextSeo } from 'next-seo'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 import { POSTS, getMdx, getPostSlug, getPostPath, mdxOptions } from 'utils/mdx'
+import Bio from '@/components/bio'
 
 export async function getStaticPaths() {
   return {
@@ -32,6 +33,7 @@ const Blog = ({ content, frontMatter }) => (
     <Head>
       <title>{frontMatter.title} | Harris Jose</title>
     </Head>
+
     <NextSeo
       openGraph={{
         title: frontMatter.title,
@@ -47,7 +49,7 @@ const Blog = ({ content, frontMatter }) => (
           {
             url: `https://opengraph.harrisjose.dev?title=${frontMatter.title}&description=${frontMatter.excerpt_raw}`,
             alt:
-              'Harris Jose | Senior Software Engineer at Facilio | React, Node.js, JavaScript',
+              'Harris Jose | Senior Software Engineer at ChronicleHQ | React, Node.js, JavaScript',
             width: 1200,
             height: 600,
           },
@@ -55,13 +57,9 @@ const Blog = ({ content, frontMatter }) => (
       }}
     />
 
-    <Header />
-
-    <main className={`container max-w-screen-md mx-auto mb-16 article`}>
-      <h1 className="text-4xl md:text-5xl mt-8 mb-0 font-bold leading-tight">
-        {frontMatter.title}
-      </h1>
-      <div className="text-sm font-light text-light mt-5">
+    <main className="container relative max-w-screen-sm mx-auto mb-16">
+      <h1 className="text-lg mt-20 mb-0 font-bold">{frontMatter.title}</h1>
+      <div className="text-sm text-dim mt-2">
         Published on{' '}
         {format(
           parseISO(frontMatter.date, 'yyyy-MM-dd', new Date()),
@@ -70,10 +68,14 @@ const Blog = ({ content, frontMatter }) => (
         {` • `}
         {frontMatter.readingTime}
       </div>
-      <div className="text-sm font-light text-light mt-12 mb-12"></div>
-      <MDXRemote {...content} />
+      <div className="mt-8 article">
+        <MDXRemote {...content} />
+      </div>
+
+      <Bio />
+      <Contact />
+      <Now />
     </main>
-    <Footer />
   </Page>
 )
 

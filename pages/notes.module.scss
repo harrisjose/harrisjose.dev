@@ -1,21 +1,8 @@
-.notes {
-  @apply mt-3;
-  @apply relative;
-}
 .note {
-  @apply p-5;
-  @apply mt-6;
-  @apply cursor-pointer;
+  // https://stackoverflow.com/questions/51253050/css-grid-grows-over-100-width-with-fr-but-not-with-minmax
+  min-width: 0;
 
-  transition: transform 0.2s ease-in-out;
-
-  @screen md {
-    @apply mx-0;
-    &:hover {
-      transform: scale(1.1);
-    }
-  }
-
+  color: var(--text-secondary);
   p + p {
     @apply mt-4;
   }
@@ -24,27 +11,22 @@
 .seachInput {
   @apply relative;
   @apply self-center;
-  @apply mt-6;
+  @apply mt-8;
   @apply mb-3;
-
-  @screen md {
-    @apply mx-0;
-  }
 
   input {
     @apply rounded;
-    @apply text-base;
-    @apply py-3;
-    @apply px-5;
+    @apply py-2 px-3;
     @apply inline-block;
     @apply w-full;
     @apply outline-none;
-    color: var(--text-primary);
+    background-color: rgb(32 31 30);
+    color: var(--text-dim);
   }
   span {
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 10px;
+    top: 10px;
 
     svg {
       @apply w-5;

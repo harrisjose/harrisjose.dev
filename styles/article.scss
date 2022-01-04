@@ -1,17 +1,19 @@
 .article {
   text-rendering: optimizeLegibility;
 
-  a {
-    color: var(--text-link);
+  h2 {
+    @apply my-8;
+    @apply font-semibold;
+  }
+
+  h3 {
+    @apply my-4;
+    @apply font-medium;
   }
 
   h2,
   h3 {
     .heading-link {
-      @apply text-xl;
-      @screen md {
-        @apply text-2xl;
-      }
       @apply ml-3;
       @apply align-middle;
       color: var(--text-highlight);
@@ -23,18 +25,12 @@
     }
   }
 
-  h2 {
-    @apply text-2xl;
-    @screen md {
-      @apply text-3xl;
-    }
-    @apply my-8;
-    @apply font-semibold;
+  a {
+    @apply underline text-light hover:text-dark;
   }
 
   p {
-    @apply leading-relaxed;
-    @apply text-lg;
+    @apply text-light;
     @apply mt-4;
     @apply mb-8;
   }
@@ -59,6 +55,13 @@
 
     background-color: var(--attention);
     border-left: 4px solid var(--text-link);
+  }
+
+  ul {
+    @apply list-disc list-inside;
+    li {
+      @apply text-light;
+    }
   }
 
   pre {
