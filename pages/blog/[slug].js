@@ -2,12 +2,12 @@ import Head from '@/components/head'
 import Page from '@/components/page'
 import Contact from '@/components/contact'
 import Now from '@/components/now'
+import Bio from '@/components/bio'
 import { format, parseISO } from 'date-fns'
 import { NextSeo } from 'next-seo'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 import { POSTS, getMdx, getPostSlug, getPostPath, mdxOptions } from 'utils/mdx'
-import Bio from '@/components/bio'
 
 export async function getStaticPaths() {
   return {

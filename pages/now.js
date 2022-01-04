@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import Page from '@/components/page'
 import Head from '@/components/head'
-import Contact from '@/components/contact'
 import Now from '@/components/now'
 import Bio from '@/components/bio'
 

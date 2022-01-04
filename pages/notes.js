@@ -84,7 +84,7 @@ const Home = ({ notes }) => {
           {result.map((note) => (
             <React.Fragment key={note.slug}>
               <div className="text-dim">{format(note.date, 'dd/MM/yyyy')}</div>
-              <div className={styles.note}>
+              <div className={styles.note} id={note.slug}>
                 <div dangerouslySetInnerHTML={{ __html: note.excerpt }}></div>
                 <div className="mt-4 w-full truncate">
                   <span className="ml-auto">{getIcon(note.link)}</span>

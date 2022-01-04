@@ -1,7 +1,8 @@
 import Head from '@/components/head'
 import Page from '@/components/page'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Contact from '@/components/contact'
+import Now from '@/components/now'
+import Bio from '@/components/bio'
 import { format } from 'date-fns'
 import { getMdx, getNoteSlug, getNotePath, NOTES, mdxOptions } from 'utils/mdx'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -34,22 +35,28 @@ const Note = ({ content, frontMatter }) => (
       </title>
     </Head>
 
-    <Header />
+    <main className={`container max-w-screen-sm mx-auto note-container mb-16`}>
+      <div className="text-light mt-16">
+        Created on {format(frontMatter.createdAt, 'MMMM dd, yyyy')}
+      </div>
 
-    <main
-      className={`container max-w-screen-md mx-auto note-container text-lg mt-10 md:mt-16`}
-    >
-      <MDXRemote {...content} />
-      <div className="mt-5">
-        <a href={frontMatter.link} className="text-link link break-words">
+      <div className="mt-4 text-lg">
+        <MDXRemote {...content} />
+      </div>
+
+      <div className="mt-8">
+        <a
+          href={frontMatter.link}
+          className="underline text-light hover:text-dark break-words"
+        >
           {frontMatter.link}
         </a>
-        <div className="text-sm font-light text-light mt-1">
-          {format(frontMatter.createdAt, 'MMMM dd, yyyy')}
-        </div>
       </div>
+
+      <Bio />
+      <Contact />
+      <Now />
     </main>
-    <Footer />
   </Page>
 )
 
