@@ -90,7 +90,7 @@ export const getMdxOptions = async () => ({
       rehypeShiki,
       {
         highlighter: await getHighlighter({
-          theme: 'nord',
+          theme: 'github-dark-dimmed',
         }),
       },
     ],

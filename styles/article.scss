@@ -67,16 +67,20 @@
   pre {
     @apply font-mono;
     @apply my-10 p-8;
-    @apply text-sm;
 
     overflow: auto;
     overflow-wrap: break-word;
     white-space: pre-wrap;
   }
 
+  pre,
+  pre > code,
+  code {
+    font-size: 13px;
+  }
+
   code {
     @apply rounded;
-    @apply text-sm;
   }
 
   .remark-code-title {
