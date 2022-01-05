@@ -4,6 +4,10 @@ import glob from 'glob'
 import matter from 'gray-matter'
 import marked from 'marked'
 import readingTime from 'reading-time'
+import rehypeShiki from '@leafac/rehype-shiki'
+import rehypeRaw from 'rehype-raw'
+import { getHighlighter } from 'shiki'
+import { nodeTypes } from '@mdx-js/mdx'
 import { format } from 'date-fns'
 
 export const POSTS_PATH = path.join(process.cwd(), 'posts')
@@ -64,7 +68,7 @@ export const getNotePath = (slug) => {
   return path.join(NOTES_PATH, slug) + '.md'
 }
 
-export const mdxOptions = {
+export const getMdxOptions = async () => ({
   remarkPlugins: [
     require('remark-slug'),
     [
@@ -81,5 +85,15 @@ export const mdxOptions = {
     ],
     require('remark-code-titles'),
   ],
-  rehypePlugins: [require('@mapbox/rehype-prism')],
-}
+  rehypePlugins: [
+    [
+      rehypeShiki,
+      {
+        highlighter: await getHighlighter({
+          theme: 'github-dark-dimmed',
+        }),
+      },
+    ],
+    [rehypeRaw, { passThrough: nodeTypes }],
+  ],
+})

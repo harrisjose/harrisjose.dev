@@ -65,22 +65,26 @@
   }
 
   pre {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    @apply my-10;
-    @apply rounded;
+    @apply font-mono;
+    @apply my-10 p-8;
+
+    overflow: auto;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
   }
 
   pre,
-  pre > code {
-    @apply text-sm;
+  pre > code,
+  code {
+    font-size: 13px;
   }
 
   code {
     @apply rounded;
-    @apply text-sm;
   }
 
   .remark-code-title {
+    display: none;
     background: var(--secondary);
     color: var(--text-secondary);
     @apply py-2;
@@ -88,10 +92,5 @@
     @apply rounded-t;
     @apply rounded-b-none;
     @apply mt-8;
-  }
-
-  .remark-code-title + pre {
-    @apply mt-0;
-    @apply rounded-t-none;
   }
 }
