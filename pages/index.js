@@ -94,8 +94,7 @@ const Home = ({ posts }) => {
           <h2 className="font-semibold">Links</h2>
           <Link href={'/notes'}>
             <div className="mt-6 text-dim hover:text-light cursor-pointer">
-              <span className="italic">Highlights</span> from stuff I've read
-              over the past couple of years →
+              Bookmarks from stuff I've read over the past couple of years →
             </div>
           </Link>{' '}
         </section>
@@ -104,14 +103,14 @@ const Home = ({ posts }) => {
           <h2 className="font-semibold">Work</h2>
 
           <div className="mt-6 grid grid-cols-split gap-x-9 gap-y-9">
-            <div className="text-dim">2021 - now</div>
+            <div className="text-base text-dim">2021 - Present</div>
             <div className="flex flex-col">
               <a className="text-light underline">Chronicle HQ</a>
               <div className="text-dim text-sm mt-1.5">Remote</div>
               <div className="text-light mt-3"></div>
             </div>
 
-            <div className="text-dim">2019 - 2021</div>
+            <div className="text-base text-dim">2019 - 2021</div>
             <div className="flex flex-col">
               <a className="text-light underline">Facilio</a>
               <div className="text-dim text-sm mt-1.5">
@@ -123,7 +122,7 @@ const Home = ({ posts }) => {
               </div>
             </div>
 
-            <div className="text-dim">2018 - 2019</div>
+            <div className="text-base text-dim">2018 - 2019</div>
             <div className="flex flex-col">
               <a className="text-light underline">Zoho Payments & Banking</a>
               <div className="text-dim text-sm mt-1.5">Chennai, India</div>
@@ -133,7 +132,7 @@ const Home = ({ posts }) => {
               </div>
             </div>
 
-            <div className="text-dim">2016 - 2018</div>
+            <div className="text-base text-dim">2016 - 2018</div>
             <div className="flex flex-col">
               <a className="text-light underline">
                 Zoho Checkout & Subscriptions

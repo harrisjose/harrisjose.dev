@@ -19,7 +19,7 @@ const Now = ({}) => {
       </h2>
       <div className="text-light mt-6">
         Whipping up a text editor and thinking about presentations on the web.
-        Getting my hands dirty with Node.js and Rust.
+        Getting my hands dirty with Typescript and Rust.
       </div>
       {song && song?.name ? (
         <a

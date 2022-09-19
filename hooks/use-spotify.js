@@ -25,7 +25,7 @@ function useSpotifyProvider() {
     }
   }
 
-  useEffect(async () => {
+  useEffect(() => {
     if (isEmpty(song?.name)) fetchCurrentPlaying()
   }, [])
 
